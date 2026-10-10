@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ENEMY - 全剧本分镜分类档案</title>
+<style>
+:root{
+  --bg:#090909; --panel:#121212; --panel2:#171717; --line:#2b2b2b; --gold:#d7a96e; --gold2:#e9c99a; --text:#f1ece5; --muted:#9d958a; --accent:#232323;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#090909 0%,#0e0d0c 100%);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+button{font:inherit} a{color:inherit}
+.app{min-height:100vh;display:grid;grid-template-rows:76px 1fr}
+.topbar{position:sticky;top:0;z-index:60;display:grid;grid-template-columns:300px 1fr 240px;align-items:center;padding:0 20px;height:76px;background:rgba(9,9,9,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand h1{margin:0;font-family:Georgia,serif;letter-spacing:4px;font-size:26px;color:var(--gold2)} .brand p{margin:4px 0 0;color:var(--muted);font-size:12px;letter-spacing:1px}
+.nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.nav button{background:#111;border:1px solid var(--line);color:#cfc5b8;padding:10px 14px;border-radius:999px;cursor:pointer}
+.nav button.active,.nav button:hover{border-color:var(--gold);color:var(--gold2);background:#191613}
+.meta{text-align:right} .meta strong{display:block;color:var(--gold2);font-size:24px} .meta span{font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:280px 1fr}
+.sidebar{position:sticky;top:76px;height:calc(100vh - 76px);overflow:auto;padding:18px;border-right:1px solid var(--line);background:rgba(15,15,15,.95)}
+.side-block{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)} .side-block:last-child{border-bottom:0} .side-block h3{margin:0 0 10px;color:var(--gold);font-size:12px;letter-spacing:2px}
+.side-btn,.filter-btn{width:100%;display:flex;justify-content:space-between;align-items:center;background:#131313;border:1px solid #303030;color:#d7cec1;padding:12px;border-radius:10px;cursor:pointer;margin-bottom:8px}
+.side-btn:hover,.side-btn.active,.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold2);background:#1a1714} .side-btn small,.filter-btn small{color:var(--muted)}
+.quick-btn{width:100%;padding:10px 12px;border-radius:9px;border:1px solid #303030;background:#121212;color:#d8cebf;cursor:pointer;margin-bottom:8px;text-align:left}
+.quick-btn:hover{border-color:var(--gold);color:var(--gold2)}
+.content{padding:18px;min-width:0} .tab{display:none} .tab.active{display:block}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.panel{background:linear-gradient(180deg,#141414 0%,#101010 100%);border:1px solid var(--line);border-radius:16px;padding:16px}
+.panel h2{margin:0 0 12px;color:var(--gold);font-size:12px;letter-spacing:2px}
+.hero-cover img{width:100%;aspect-ratio:2.39/1;object-fit:cover;border-radius:12px;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px} .stat{background:#171717;border:1px solid #313131;padding:14px;border-radius:12px} .stat b{display:block;color:var(--gold2);font-size:26px} .stat span{font-size:12px;color:var(--muted)}
+.tag-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px} .tag{padding:8px 12px;background:#1a1a1a;border:1px solid #313131;border-radius:999px;color:#cfc4b6;font-size:12px}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:22px 0 10px} .section-title h3{margin:0;font-size:22px} .section-title p{margin:5px 0 0;color:var(--muted)}
+.inline-btn{background:#171717;border:1px solid #313131;color:#d9cfbf;padding:10px 14px;border-radius:999px;cursor:pointer} .inline-btn:hover{border-color:var(--gold);color:var(--gold2)}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px} .filter-row .filter-btn{width:auto;gap:12px;padding:9px 14px;border-radius:999px;margin:0}
+.gallery-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.masonry{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.shot-card{background:#151515;border:1px solid #2e2e2e;border-radius:14px;padding:8px;color:var(--text);text-align:left;cursor:pointer;transition:.18s ease}
+.shot-card:hover,.shot-card.active{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.shot-card img{width:100%;aspect-ratio:2.39/1;object-fit:cover;border-radius:10px}
+.shot-top{display:flex;justify-content:space-between;align-items:center;margin-top:8px} .shot-top span{font-size:11px;color:var(--gold2);font-weight:700;letter-spacing:.5px} .shot-top small{color:var(--muted);font-size:10px}
+.shot-card h4{margin:8px 0 6px;font-size:16px} .shot-card p{margin:0;color:#b6aea3;font-size:12px;line-height:1.55;min-height:56px}
+.detail-stick{position:sticky;top:94px} .detail-cover img{width:100%;aspect-ratio:2.39/1;object-fit:cover;border-radius:12px;cursor:pointer}
+.detail-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px} .detail-head h3{margin:0;font-size:28px} .detail-id{padding:6px 10px;border:1px solid #3a3128;border-radius:999px;color:var(--gold2);font-size:12px}
+.detail-sub{color:var(--muted);margin:6px 0 14px} .info-grid{display:grid;grid-template-columns:84px 1fr;gap:8px 10px;font-size:12px;margin-bottom:14px} .info-grid dt{color:var(--gold)} .info-grid dd{margin:0;color:#d4cbbe}
+.script-box,.prompt-box{background:#171717;border:1px solid #2f2f2f;border-radius:12px;padding:12px;margin-bottom:12px} .script-box p,.prompt-box p{margin:0;color:#d6cdc2;line-height:1.72;font-size:13px}
+.detail-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px} .detail-actions button{border:1px solid #313131;background:#151515;color:#d8cdbd;padding:10px;border-radius:10px;cursor:pointer} .detail-actions button:hover{border-color:var(--gold);color:var(--gold2)}
+.ep-block{margin-bottom:22px} .ep-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:12px} .ep-head h3{margin:0;font-size:24px} .ep-head p{margin:4px 0 0;color:var(--muted)} .episode-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.script-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px} .script-block{background:#141414;border:1px solid var(--line);border-radius:16px;padding:16px} .script-head h3{margin:0 0 4px;font-size:24px} .script-head p{margin:0 0 14px;color:var(--muted)}
+.script-list{display:grid;gap:8px}
+.script-row{display:grid;grid-template-columns:70px 1fr 110px;align-items:center;gap:10px;width:100%;text-align:left;background:#171717;border:1px solid #2e2e2e;color:#ddd3c6;padding:12px;border-radius:10px;cursor:pointer}
+.script-row:hover{border-color:var(--gold);color:var(--gold2)} .row-id{color:var(--gold2);font-weight:700} .row-time{text-align:right;color:var(--muted);font-size:12px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:999;padding:24px} .overlay.open{display:flex} .overlay img{max-width:95vw;max-height:86vh;border-radius:12px} .overlay button{position:absolute;top:18px;right:24px;background:none;border:0;color:#fff;font-size:34px;cursor:pointer}
+.toast{position:fixed;bottom:24px;right:24px;background:#181410;border:1px solid var(--gold);color:var(--gold2);padding:10px 14px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:1000} .toast.show{opacity:1}
+.hidden{display:none !important}
+@media (max-width:1280px){.topbar{grid-template-columns:260px 1fr} .meta{display:none} .gallery-layout,.hero{grid-template-columns:1fr} .masonry{grid-template-columns:repeat(2,1fr)} .episode-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:980px){.layout{grid-template-columns:1fr} .sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)} .detail-stick{position:static} .script-grid{grid-template-columns:1fr}}
+@media (max-width:720px){.topbar{display:block;height:auto;padding:14px 16px} .brand{margin-bottom:12px} .nav{justify-content:flex-start} .masonry,.episode-grid{grid-template-columns:1fr} .detail-actions{grid-template-columns:repeat(2,1fr)} .script-row{grid-template-columns:60px 1fr} .row-time{grid-column:2;text-align:left}}
+
+.system-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.system-card{border:1px solid #342f29;background:#151515;color:var(--text);padding:10px;border-radius:12px;text-align:left;cursor:pointer}
+.system-card:hover,.system-card.active{border-color:var(--gold);transform:translateY(-2px)}
+.system-card img{width:100%;aspect-ratio:2.39/1;object-fit:cover;border-radius:8px}
+.system-card h4{color:var(--gold2);margin:9px 0 5px}
+.system-card p{color:#aca398;font-size:12px;line-height:1.55}
+.system-detail{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.system-detail img{width:100%;aspect-ratio:2.39/1;object-fit:cover;border-radius:10px}
+.system-detail h3{font-size:27px;margin:8px 0}
+.system-detail p{color:#cfc5b8;line-height:1.75}
+.sound-card,.plan-card{width:100%;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;border:1px solid #342f29;background:#151515;color:var(--text);padding:13px;border-radius:11px;margin-bottom:10px;text-align:left;cursor:pointer}
+.sound-card:hover,.plan-card:hover,.sound-card.playing{border-color:var(--gold)}
+.sound-card span{font-size:25px;color:var(--gold2)}
+.sound-card h4,.plan-card h4{margin:0 0 4px}
+.sound-card p,.plan-card p{margin:0;color:#aaa196;font-size:12px}
+.sound-card b,.plan-card b{color:var(--gold2)}
+.plan-card i{display:block;width:12px;height:12px;border-radius:50%;background:#5ea864}
+.plan-card:not(.done) i{background:#9f5b5b}
+.plan-card:not(.done) b{color:#d89b9b}
+@media (max-width:1100px){.system-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:720px){.system-grid,.system-detail{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>ENEMY</h1>
+      <p>完整剧本 × 全部分镜图片 × 分类归档网站</p>
+    </div>
+    <nav class="nav">
+      <button class="active" data-tabbtn="overview" onclick="switchTab('overview',this)">概览</button>
+      <button data-tabbtn="gallery" onclick="switchTab('gallery',this)">全部镜头</button>
+      <button data-tabbtn="episodes" onclick="switchTab('episodes',this)">章节分类</button>
+      <button data-tabbtn="script" onclick="switchTab('script',this)">剧本目录</button>
+      <button data-tabbtn="characters" onclick="switchTab('characters',this)">角色设定</button>
+      <button data-tabbtn="locations" onclick="switchTab('locations',this)">场景设定</button>
+      <button data-tabbtn="sound" onclick="switchTab('sound',this)">声音与道具</button>
+      <button data-tabbtn="plan" onclick="switchTab('plan',this)">制作计划</button>
+    </nav>
+    <div class="meta">
+      <strong>24 镜头</strong>
+      <span>全部图片已归类，不留待制作空位</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-block">
+        <h3>章节筛选</h3>
+        <button class="side-btn active" onclick="filterShots('ALL',this)"><span>全部镜头</span><small>24</small></button>
+        <button class="side-btn" onclick="filterShots('EP01',this)"><span>EP01</span><small>5</small></button>
+        <button class="side-btn" onclick="filterShots('EP02',this)"><span>EP02</span><small>5</small></button>
+        <button class="side-btn" onclick="filterShots('EP03',this)"><span>EP03</span><small>5</small></button>
+        <button class="side-btn" onclick="filterShots('EP04',this)"><span>EP04</span><small>5</small></button>
+        <button class="side-btn" onclick="filterShots('EP05',this)"><span>EP05</span><small>4</small></button>
+      </div>
+      <div class="side-block">
+        <h3>快速跳转</h3>
+        <button class="quick-btn" onclick="switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'));openShot('SC01')">跳到第一镜</button>
+        <button class="quick-btn" onclick="switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'));openShot('SC24')">跳到最后一镜</button>
+        <button class="quick-btn" onclick="switchTab('episodes',document.querySelector('[data-tabbtn=episodes]'));document.getElementById('EP04').scrollIntoView({behavior:'smooth'})">跳到面试章节</button>
+        <button class="quick-btn" onclick="copyCurrentPrompt()">复制当前镜头提示词</button>
+      </div>
+      <div class="side-block">
+        <h3>当前镜头</h3>
+        <button class="quick-btn" onclick="prevShot()">上一镜</button>
+        <button class="quick-btn" onclick="nextShot()">下一镜</button>
+        <button class="quick-btn" onclick="openCurrentImage()">全屏看图</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="tab active" id="tab-overview">
+        <div class="hero">
+          <div class="panel hero-cover">
+            <h2>项目总览</h2>
+            <img src="images/enemy-001-7c054c99d035.webp" alt="总览图" onclick="openImage(this.src)">
+          </div>
+          <div class="panel">
+            <h2>结构信息</h2>
+            <div class="stats">
+              <div class="stat"><b>24</b><span>总镜头数量</span></div>
+              <div class="stat"><b>05</b><span>章节分类</span></div>
+              <div class="stat"><b>60s</b><span>总片长</span></div>
+              <div class="stat"><b>100%</b><span>全部已配图</span></div>
+            </div>
+            <div class="tag-row">
+              <span class="tag">应届生求职</span>
+              <span class="tag">现实主义</span>
+              <span class="tag">电影级分镜</span>
+              <span class="tag">人物主线连续</span>
+              <span class="tag">可继续扩展为 AI 视频</span>
+            </div>
+            <div class="section-title" style="margin-top:18px;">
+              <div>
+                <h3>你要的版本</h3>
+                <p>整个剧本的所有镜头图片，已经统一放进同一个网站里，并且按章节分类。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">
+          <div>
+            <h3>章节导航</h3>
+            <p>点击任意章节按钮，会跳转到对应分类分镜。</p>
+          </div>
+        </div>
+        <div class="filter-row">
+          <button class="filter-btn" onclick="switchTab('episodes',document.querySelector('[data-tabbtn=episodes]'));document.getElementById('EP01').scrollIntoView({behavior:'smooth'})"><span>EP01 第一章</span><small>抵达广州</small></button>
+          <button class="filter-btn" onclick="switchTab('episodes',document.querySelector('[data-tabbtn=episodes]'));document.getElementById('EP02').scrollIntoView({behavior:'smooth'})"><span>EP02 第二章</span><small>拒信循环</small></button>
+          <button class="filter-btn" onclick="switchTab('episodes',document.querySelector('[data-tabbtn=episodes]'));document.getElementById('EP03').scrollIntoView({behavior:'smooth'})"><span>EP03 第三章</span><small>自我怀疑</small></button>
+          <button class="filter-btn" onclick="switchTab('episodes',document.querySelector('[data-tabbtn=episodes]'));document.getElementById('EP04').scrollIntoView({behavior:'smooth'})"><span>EP04 第四章</span><small>重新出发</small></button>
+          <button class="filter-btn" onclick="switchTab('episodes',document.querySelector('[data-tabbtn=episodes]'));document.getElementById('EP05').scrollIntoView({behavior:'smooth'})"><span>EP05 第五章</span><small>结果与新开始</small></button>
+        </div>
+      </section>
+
+      <section class="tab" id="tab-gallery">
+        <div class="section-title">
+          <div>
+            <h3>全部镜头图库</h3>
+            <p>左侧可以按 EP01–EP05 筛选；点击镜头卡查看大图、剧本内容与提示词。</p>
+          </div>
+        </div>
+        <div class="gallery-layout">
+          <div class="panel">
+            <h2>SHOT GALLERY</h2>
+            <div class="masonry" id="galleryGrid">
+              
+        <button class="shot-card" data-id="SC01" data-ep="EP01" onclick="openShot('SC01')">
+            <img src="images/enemy-001-7c054c99d035.webp" alt="广州凌晨">
+            <div class="shot-top"><span>SC01</span><small>00:00–00:02</small></div>
+            <h4>广州凌晨</h4>
+            <p>城市建立镜头。高楼、路灯、凌晨天际线，广州像一个巨大系统开始运转。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC02" data-ep="EP01" onclick="openShot('SC02')">
+            <img src="images/enemy-002-59770486e1df.webp" alt="12平方米出租屋">
+            <div class="shot-top"><span>SC02</span><small>00:02–00:06</small></div>
+            <h4>12平方米出租屋</h4>
+            <p>逼仄出租屋内部，床、桌子、台灯、衣架与旧帆布包全部入镜。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC03" data-ep="EP01" onclick="openShot('SC03')">
+            <img src="images/enemy-003-380bc6a3e19d.webp" alt="作品集细节">
+            <div class="shot-top"><span>SC03</span><small>00:06–00:10</small></div>
+            <h4>作品集细节</h4>
+            <p>手部特写，翻页、笔记、修改痕迹、咖啡渍和折角。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC04" data-ep="EP01" onclick="openShot('SC04')">
+            <img src="images/enemy-004-302db049cd33.webp" alt="广州，加油">
+            <div class="shot-top"><span>SC04</span><small>00:10–00:15</small></div>
+            <h4>广州，加油</h4>
+            <p>暖灯桌面，便利贴、自我提醒、简历旁边的手机与台灯形成视觉中心。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC05" data-ep="EP01" onclick="openShot('SC05')">
+            <img src="images/enemy-005-6096d7264b15.webp" alt="第一次投递">
+            <div class="shot-top"><span>SC05</span><small>00:15–00:20</small></div>
+            <h4>第一次投递</h4>
+            <p>电脑屏幕前，鼠标停留在发送按钮，小满呼吸后点击。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC06" data-ep="EP02" onclick="openShot('SC06')">
+            <img src="images/enemy-006-3938491a7763.webp" alt="手机震动">
+            <div class="shot-top"><span>SC06</span><small>00:20–00:23</small></div>
+            <h4>手机震动</h4>
+            <p>桌面与手机震动的瞬间，屏幕亮起。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC07" data-ep="EP02" onclick="openShot('SC07')">
+            <img src="images/enemy-007-a6e9afde3de3.webp" alt="第一封拒信">
+            <div class="shot-top"><span>SC07</span><small>00:23–00:28</small></div>
+            <h4>第一封拒信</h4>
+            <p>她对着亮起的屏幕看见拒绝，神情慢慢落下。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC08" data-ep="EP02" onclick="openShot('SC08')">
+            <img src="images/enemy-008-bbfa18ab133e.webp" alt="同学 Offer 群聊">
+            <div class="shot-top"><span>SC08</span><small>00:28–00:32</small></div>
+            <h4>同学 Offer 群聊</h4>
+            <p>同学群里不断弹出上岸消息，屏幕反光映在脸上。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC09" data-ep="EP02" onclick="openShot('SC09')">
+            <img src="images/enemy-009-5adfdde6dcef.webp" alt="假装祝福">
+            <div class="shot-top"><span>SC09</span><small>00:32–00:36</small></div>
+            <h4>假装祝福</h4>
+            <p>输入‘恭喜’，删掉，重打，再发送。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC10" data-ep="EP02" onclick="openShot('SC10')">
+            <img src="images/enemy-010-2e88df8a6471.webp" alt="凌晨修改作品集">
+            <div class="shot-top"><span>SC10</span><small>00:36–00:45</small></div>
+            <h4>凌晨修改作品集</h4>
+            <p>深夜伏案，版本一遍遍迭代，房间只剩屏幕和台灯。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC11" data-ep="EP03" onclick="openShot('SC11')">
+            <img src="images/enemy-011-77b7add2fb5e.webp" alt="父母电话">
+            <div class="shot-top"><span>SC11</span><small>00:45–00:47</small></div>
+            <h4>父母电话</h4>
+            <p>手机来电显示‘妈妈’，她手指悬停，没有立刻接。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC12" data-ep="EP03" onclick="openShot('SC12')">
+            <img src="images/enemy-012-5f893783e8c6.webp" alt="一个人吃饭">
+            <div class="shot-top"><span>SC12</span><small>00:47–00:49</small></div>
+            <h4>一个人吃饭</h4>
+            <p>深夜独自吃廉价外卖，桌上还摊着资料。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC13" data-ep="EP03" onclick="openShot('SC13')">
+            <img src="images/enemy-013-807630241127.webp" alt="招聘网站刷新">
+            <div class="shot-top"><span>SC13</span><small>00:49–00:51</small></div>
+            <h4>招聘网站刷新</h4>
+            <p>电脑屏幕职位列表不断刷新，几乎没变化。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC14" data-ep="EP03" onclick="openShot('SC14')">
+            <img src="images/enemy-014-c970ed94e40c.webp" alt="深夜崩溃">
+            <div class="shot-top"><span>SC14</span><small>00:51–00:53</small></div>
+            <h4>深夜崩溃</h4>
+            <p>她疲惫到趴下，情绪失控，灯光与阴影压下来。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC15" data-ep="EP03" onclick="openShot('SC15')">
+            <img src="images/enemy-015-6e575c66c1ac.webp" alt="重新打开电脑">
+            <div class="shot-top"><span>SC15</span><small>00:53–00:55</small></div>
+            <h4>重新打开电脑</h4>
+            <p>她抬起头，再一次把电脑拉回自己面前。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC16" data-ep="EP04" onclick="openShot('SC16')">
+            <img src="images/enemy-016-65f769cb2f4b.webp" alt="面试邀请">
+            <div class="shot-top"><span>SC16</span><small>00:55–00:56</small></div>
+            <h4>面试邀请</h4>
+            <p>夜里手机亮起，邮件通知映在她的眼镜上。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC17" data-ep="EP04" onclick="openShot('SC17')">
+            <img src="images/enemy-017-34cab1bdcb2f.webp" alt="整理简历">
+            <div class="shot-top"><span>SC17</span><small>00:56–00:57</small></div>
+            <h4>整理简历</h4>
+            <p>她重新修正简历与作品集，把夸张词删掉，把真正做过的事留下。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC18" data-ep="EP04" onclick="openShot('SC18')">
+            <img src="images/enemy-018-8b6ec4fc9bcc.webp" alt="镜中练习">
+            <div class="shot-top"><span>SC18</span><small>00:57–00:58</small></div>
+            <h4>镜中练习</h4>
+            <p>镜子前整理碎发，练习自我介绍。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC19" data-ep="EP04" onclick="openShot('SC19')">
+            <img src="images/enemy-019-2f1e27aaf3d2.webp" alt="赶往面试">
+            <div class="shot-top"><span>SC19</span><small>00:58–00:59</small></div>
+            <h4>赶往面试</h4>
+            <p>地铁站里的人潮，小满背着帆布包穿行其中。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC20" data-ep="EP04" onclick="openShot('SC20')">
+            <img src="images/enemy-020-9171f3d984d4.webp" alt="面试等待">
+            <div class="shot-top"><span>SC20</span><small>00:59–01:00</small></div>
+            <h4>面试等待</h4>
+            <p>会议室外的长椅上，她抱着作品集等待。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC21" data-ep="EP05" onclick="openShot('SC21')">
+            <img src="images/enemy-021-11fa892bb340.webp" alt="面对面试官">
+            <div class="shot-top"><span>SC21</span><small>01:00–01:04</small></div>
+            <h4>面对面试官</h4>
+            <p>她开始真正讲自己的项目，不再机械背诵。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC22" data-ep="EP05" onclick="openShot('SC22')">
+            <img src="images/enemy-022-956a2df51c48.webp" alt="走出大楼">
+            <div class="shot-top"><span>SC22</span><small>01:04–01:08</small></div>
+            <h4>走出大楼</h4>
+            <p>她从大楼门口走出来，光线更亮，但结果还没落地。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC23" data-ep="EP05" onclick="openShot('SC23')">
+            <img src="images/enemy-023-1d9c911862f6.webp" alt="收到 Offer">
+            <div class="shot-top"><span>SC23</span><small>01:08–01:11</small></div>
+            <h4>收到 Offer</h4>
+            <p>深夜电脑前，她看着屏幕上的录用消息，先是愣住，再捂住嘴。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC24" data-ep="EP05" onclick="openShot('SC24')">
+            <img src="images/enemy-024-d1796a28db3e.webp" alt="阳台新开始">
+            <div class="shot-top"><span>SC24</span><small>01:11–01:15</small></div>
+            <h4>阳台新开始</h4>
+            <p>清晨或黄昏阳台上，她望向城市，风吹动碎发。</p>
+        </button>
+        
+            </div>
+          </div>
+          <div class="panel detail-stick">
+            <h2>镜头详情</h2>
+            <div class="detail-cover">
+              <img id="detailImage" src="images/enemy-001-7c054c99d035.webp" alt="当前镜头" onclick="openCurrentImage()">
+            </div>
+            <div class="detail-head">
+              <h3 id="detailTitle">广州凌晨</h3>
+              <span class="detail-id" id="detailId">SC01</span>
+            </div>
+            <p class="detail-sub" id="detailSub">第一章·抵达广州 · 00:00–00:02</p>
+            <dl class="info-grid">
+              <dt>章节</dt><dd id="detailEp">EP01</dd>
+              <dt>镜头时间</dt><dd id="detailTime">00:00–00:02</dd>
+              <dt>画面说明</dt><dd id="detailScene">城市建立镜头。高楼、路灯、凌晨天际线，广州像一个巨大系统开始运转。</dd>
+              <dt>镜头调度</dt><dd id="detailCamera">超广角远景 / 静止</dd>
+              <dt>情绪</dt><dd id="detailEmotion">渺小、陌生</dd>
+            </dl>
+            <div class="script-box">
+              <h2 style="margin-bottom:8px;">对应剧本文字</h2>
+              <p id="detailScript">广州的夜还没结束，新的一天已经开始。林小满站在这座城市之外，像刚被放进齿轮里的一颗小零件。</p>
+            </div>
+            <div class="prompt-box">
+              <h2 style="margin-bottom:8px;">AI 提示词</h2>
+              <p id="detailPrompt">Cinematic wide city skyline at night, Guangzhou atmosphere, lonely graduate tone, realistic moody film still.</p>
+            </div>
+            <div class="detail-actions">
+              <button onclick="prevShot()">上一镜</button>
+              <button onclick="nextShot()">下一镜</button>
+              <button onclick="openCurrentImage()">全屏看图</button>
+              <button onclick="copyCurrentPrompt()">复制提示词</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab" id="tab-episodes">
+        <div class="section-title">
+          <div>
+            <h3>按章节分类的完整镜头</h3>
+            <p>每一章都直接展示对应图片，不再只是一张总图或文字占位。</p>
+          </div>
+        </div>
+        
+    <section class="ep-block" id="EP01">
+        <div class="ep-head">
+            <div>
+                <h3>EP01</h3>
+                <p>第一章·抵达广州</p>
+            </div>
+            <button class="inline-btn" onclick="scrollToTopAndShow('EP01')">只看这一章</button>
+        </div>
+        <div class="episode-grid">
+            
+        <button class="shot-card" data-id="SC01" data-ep="EP01" onclick="openShot('SC01')">
+            <img src="images/enemy-001-7c054c99d035.webp" alt="广州凌晨">
+            <div class="shot-top"><span>SC01</span><small>00:00–00:02</small></div>
+            <h4>广州凌晨</h4>
+            <p>城市建立镜头。高楼、路灯、凌晨天际线，广州像一个巨大系统开始运转。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC02" data-ep="EP01" onclick="openShot('SC02')">
+            <img src="images/enemy-002-59770486e1df.webp" alt="12平方米出租屋">
+            <div class="shot-top"><span>SC02</span><small>00:02–00:06</small></div>
+            <h4>12平方米出租屋</h4>
+            <p>逼仄出租屋内部，床、桌子、台灯、衣架与旧帆布包全部入镜。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC03" data-ep="EP01" onclick="openShot('SC03')">
+            <img src="images/enemy-003-380bc6a3e19d.webp" alt="作品集细节">
+            <div class="shot-top"><span>SC03</span><small>00:06–00:10</small></div>
+            <h4>作品集细节</h4>
+            <p>手部特写，翻页、笔记、修改痕迹、咖啡渍和折角。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC04" data-ep="EP01" onclick="openShot('SC04')">
+            <img src="images/enemy-004-302db049cd33.webp" alt="广州，加油">
+            <div class="shot-top"><span>SC04</span><small>00:10–00:15</small></div>
+            <h4>广州，加油</h4>
+            <p>暖灯桌面，便利贴、自我提醒、简历旁边的手机与台灯形成视觉中心。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC05" data-ep="EP01" onclick="openShot('SC05')">
+            <img src="images/enemy-005-6096d7264b15.webp" alt="第一次投递">
+            <div class="shot-top"><span>SC05</span><small>00:15–00:20</small></div>
+            <h4>第一次投递</h4>
+            <p>电脑屏幕前，鼠标停留在发送按钮，小满呼吸后点击。</p>
+        </button>
+        
+        </div>
+    </section>
+    
+    <section class="ep-block" id="EP02">
+        <div class="ep-head">
+            <div>
+                <h3>EP02</h3>
+                <p>第二章·拒信循环</p>
+            </div>
+            <button class="inline-btn" onclick="scrollToTopAndShow('EP02')">只看这一章</button>
+        </div>
+        <div class="episode-grid">
+            
+        <button class="shot-card" data-id="SC06" data-ep="EP02" onclick="openShot('SC06')">
+            <img src="images/enemy-006-3938491a7763.webp" alt="手机震动">
+            <div class="shot-top"><span>SC06</span><small>00:20–00:23</small></div>
+            <h4>手机震动</h4>
+            <p>桌面与手机震动的瞬间，屏幕亮起。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC07" data-ep="EP02" onclick="openShot('SC07')">
+            <img src="images/enemy-007-a6e9afde3de3.webp" alt="第一封拒信">
+            <div class="shot-top"><span>SC07</span><small>00:23–00:28</small></div>
+            <h4>第一封拒信</h4>
+            <p>她对着亮起的屏幕看见拒绝，神情慢慢落下。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC08" data-ep="EP02" onclick="openShot('SC08')">
+            <img src="images/enemy-008-bbfa18ab133e.webp" alt="同学 Offer 群聊">
+            <div class="shot-top"><span>SC08</span><small>00:28–00:32</small></div>
+            <h4>同学 Offer 群聊</h4>
+            <p>同学群里不断弹出上岸消息，屏幕反光映在脸上。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC09" data-ep="EP02" onclick="openShot('SC09')">
+            <img src="images/enemy-009-5adfdde6dcef.webp" alt="假装祝福">
+            <div class="shot-top"><span>SC09</span><small>00:32–00:36</small></div>
+            <h4>假装祝福</h4>
+            <p>输入‘恭喜’，删掉，重打，再发送。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC10" data-ep="EP02" onclick="openShot('SC10')">
+            <img src="images/enemy-010-2e88df8a6471.webp" alt="凌晨修改作品集">
+            <div class="shot-top"><span>SC10</span><small>00:36–00:45</small></div>
+            <h4>凌晨修改作品集</h4>
+            <p>深夜伏案，版本一遍遍迭代，房间只剩屏幕和台灯。</p>
+        </button>
+        
+        </div>
+    </section>
+    
+    <section class="ep-block" id="EP03">
+        <div class="ep-head">
+            <div>
+                <h3>EP03</h3>
+                <p>第三章·自我怀疑</p>
+            </div>
+            <button class="inline-btn" onclick="scrollToTopAndShow('EP03')">只看这一章</button>
+        </div>
+        <div class="episode-grid">
+            
+        <button class="shot-card" data-id="SC11" data-ep="EP03" onclick="openShot('SC11')">
+            <img src="images/enemy-011-77b7add2fb5e.webp" alt="父母电话">
+            <div class="shot-top"><span>SC11</span><small>00:45–00:47</small></div>
+            <h4>父母电话</h4>
+            <p>手机来电显示‘妈妈’，她手指悬停，没有立刻接。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC12" data-ep="EP03" onclick="openShot('SC12')">
+            <img src="images/enemy-012-5f893783e8c6.webp" alt="一个人吃饭">
+            <div class="shot-top"><span>SC12</span><small>00:47–00:49</small></div>
+            <h4>一个人吃饭</h4>
+            <p>深夜独自吃廉价外卖，桌上还摊着资料。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC13" data-ep="EP03" onclick="openShot('SC13')">
+            <img src="images/enemy-013-807630241127.webp" alt="招聘网站刷新">
+            <div class="shot-top"><span>SC13</span><small>00:49–00:51</small></div>
+            <h4>招聘网站刷新</h4>
+            <p>电脑屏幕职位列表不断刷新，几乎没变化。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC14" data-ep="EP03" onclick="openShot('SC14')">
+            <img src="images/enemy-014-c970ed94e40c.webp" alt="深夜崩溃">
+            <div class="shot-top"><span>SC14</span><small>00:51–00:53</small></div>
+            <h4>深夜崩溃</h4>
+            <p>她疲惫到趴下，情绪失控，灯光与阴影压下来。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC15" data-ep="EP03" onclick="openShot('SC15')">
+            <img src="images/enemy-015-6e575c66c1ac.webp" alt="重新打开电脑">
+            <div class="shot-top"><span>SC15</span><small>00:53–00:55</small></div>
+            <h4>重新打开电脑</h4>
+            <p>她抬起头，再一次把电脑拉回自己面前。</p>
+        </button>
+        
+        </div>
+    </section>
+    
+    <section class="ep-block" id="EP04">
+        <div class="ep-head">
+            <div>
+                <h3>EP04</h3>
+                <p>第四章·重新出发</p>
+            </div>
+            <button class="inline-btn" onclick="scrollToTopAndShow('EP04')">只看这一章</button>
+        </div>
+        <div class="episode-grid">
+            
+        <button class="shot-card" data-id="SC16" data-ep="EP04" onclick="openShot('SC16')">
+            <img src="images/enemy-016-65f769cb2f4b.webp" alt="面试邀请">
+            <div class="shot-top"><span>SC16</span><small>00:55–00:56</small></div>
+            <h4>面试邀请</h4>
+            <p>夜里手机亮起，邮件通知映在她的眼镜上。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC17" data-ep="EP04" onclick="openShot('SC17')">
+            <img src="images/enemy-017-34cab1bdcb2f.webp" alt="整理简历">
+            <div class="shot-top"><span>SC17</span><small>00:56–00:57</small></div>
+            <h4>整理简历</h4>
+            <p>她重新修正简历与作品集，把夸张词删掉，把真正做过的事留下。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC18" data-ep="EP04" onclick="openShot('SC18')">
+            <img src="images/enemy-018-8b6ec4fc9bcc.webp" alt="镜中练习">
+            <div class="shot-top"><span>SC18</span><small>00:57–00:58</small></div>
+            <h4>镜中练习</h4>
+            <p>镜子前整理碎发，练习自我介绍。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC19" data-ep="EP04" onclick="openShot('SC19')">
+            <img src="images/enemy-019-2f1e27aaf3d2.webp" alt="赶往面试">
+            <div class="shot-top"><span>SC19</span><small>00:58–00:59</small></div>
+            <h4>赶往面试</h4>
+            <p>地铁站里的人潮，小满背着帆布包穿行其中。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC20" data-ep="EP04" onclick="openShot('SC20')">
+            <img src="images/enemy-020-9171f3d984d4.webp" alt="面试等待">
+            <div class="shot-top"><span>SC20</span><small>00:59–01:00</small></div>
+            <h4>面试等待</h4>
+            <p>会议室外的长椅上，她抱着作品集等待。</p>
+        </button>
+        
+        </div>
+    </section>
+    
+    <section class="ep-block" id="EP05">
+        <div class="ep-head">
+            <div>
+                <h3>EP05</h3>
+                <p>第五章·结果与新开始</p>
+            </div>
+            <button class="inline-btn" onclick="scrollToTopAndShow('EP05')">只看这一章</button>
+        </div>
+        <div class="episode-grid">
+            
+        <button class="shot-card" data-id="SC21" data-ep="EP05" onclick="openShot('SC21')">
+            <img src="images/enemy-021-11fa892bb340.webp" alt="面对面试官">
+            <div class="shot-top"><span>SC21</span><small>01:00–01:04</small></div>
+            <h4>面对面试官</h4>
+            <p>她开始真正讲自己的项目，不再机械背诵。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC22" data-ep="EP05" onclick="openShot('SC22')">
+            <img src="images/enemy-022-956a2df51c48.webp" alt="走出大楼">
+            <div class="shot-top"><span>SC22</span><small>01:04–01:08</small></div>
+            <h4>走出大楼</h4>
+            <p>她从大楼门口走出来，光线更亮，但结果还没落地。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC23" data-ep="EP05" onclick="openShot('SC23')">
+            <img src="images/enemy-023-1d9c911862f6.webp" alt="收到 Offer">
+            <div class="shot-top"><span>SC23</span><small>01:08–01:11</small></div>
+            <h4>收到 Offer</h4>
+            <p>深夜电脑前，她看着屏幕上的录用消息，先是愣住，再捂住嘴。</p>
+        </button>
+        
+        <button class="shot-card" data-id="SC24" data-ep="EP05" onclick="openShot('SC24')">
+            <img src="images/enemy-024-d1796a28db3e.webp" alt="阳台新开始">
+            <div class="shot-top"><span>SC24</span><small>01:11–01:15</small></div>
+            <h4>阳台新开始</h4>
+            <p>清晨或黄昏阳台上，她望向城市，风吹动碎发。</p>
+        </button>
+        
+        </div>
+    </section>
+    
+      </section>
+
+      <section class="tab" id="tab-script">
+        <div class="section-title">
+          <div>
+            <h3>完整剧本目录</h3>
+            <p>点击任意行会打开对应镜头详情，并自动切换到“全部镜头”页面。</p>
+          </div>
+        </div>
+        <div class="script-grid">
+          
+    <div class="script-block">
+        <div class="script-head">
+            <h3>EP01</h3>
+            <p>第一章·抵达广州</p>
+        </div>
+        <div class="script-list">
+        <button class="script-row" onclick="openShot('SC01');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC01</span>
+            <span class="row-title">广州凌晨</span>
+            <span class="row-time">00:00–00:02</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC02');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC02</span>
+            <span class="row-title">12平方米出租屋</span>
+            <span class="row-time">00:02–00:06</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC03');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC03</span>
+            <span class="row-title">作品集细节</span>
+            <span class="row-time">00:06–00:10</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC04');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC04</span>
+            <span class="row-title">广州，加油</span>
+            <span class="row-time">00:10–00:15</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC05');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC05</span>
+            <span class="row-title">第一次投递</span>
+            <span class="row-time">00:15–00:20</span>
+        </button>
+        </div>
+    </div>
+    
+    <div class="script-block">
+        <div class="script-head">
+            <h3>EP02</h3>
+            <p>第二章·拒信循环</p>
+        </div>
+        <div class="script-list">
+        <button class="script-row" onclick="openShot('SC06');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC06</span>
+            <span class="row-title">手机震动</span>
+            <span class="row-time">00:20–00:23</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC07');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC07</span>
+            <span class="row-title">第一封拒信</span>
+            <span class="row-time">00:23–00:28</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC08');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC08</span>
+            <span class="row-title">同学 Offer 群聊</span>
+            <span class="row-time">00:28–00:32</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC09');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC09</span>
+            <span class="row-title">假装祝福</span>
+            <span class="row-time">00:32–00:36</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC10');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC10</span>
+            <span class="row-title">凌晨修改作品集</span>
+            <span class="row-time">00:36–00:45</span>
+        </button>
+        </div>
+    </div>
+    
+    <div class="script-block">
+        <div class="script-head">
+            <h3>EP03</h3>
+            <p>第三章·自我怀疑</p>
+        </div>
+        <div class="script-list">
+        <button class="script-row" onclick="openShot('SC11');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC11</span>
+            <span class="row-title">父母电话</span>
+            <span class="row-time">00:45–00:47</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC12');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC12</span>
+            <span class="row-title">一个人吃饭</span>
+            <span class="row-time">00:47–00:49</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC13');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC13</span>
+            <span class="row-title">招聘网站刷新</span>
+            <span class="row-time">00:49–00:51</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC14');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC14</span>
+            <span class="row-title">深夜崩溃</span>
+            <span class="row-time">00:51–00:53</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC15');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC15</span>
+            <span class="row-title">重新打开电脑</span>
+            <span class="row-time">00:53–00:55</span>
+        </button>
+        </div>
+    </div>
+    
+    <div class="script-block">
+        <div class="script-head">
+            <h3>EP04</h3>
+            <p>第四章·重新出发</p>
+        </div>
+        <div class="script-list">
+        <button class="script-row" onclick="openShot('SC16');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC16</span>
+            <span class="row-title">面试邀请</span>
+            <span class="row-time">00:55–00:56</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC17');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC17</span>
+            <span class="row-title">整理简历</span>
+            <span class="row-time">00:56–00:57</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC18');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC18</span>
+            <span class="row-title">镜中练习</span>
+            <span class="row-time">00:57–00:58</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC19');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC19</span>
+            <span class="row-title">赶往面试</span>
+            <span class="row-time">00:58–00:59</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC20');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC20</span>
+            <span class="row-title">面试等待</span>
+            <span class="row-time">00:59–01:00</span>
+        </button>
+        </div>
+    </div>
+    
+    <div class="script-block">
+        <div class="script-head">
+            <h3>EP05</h3>
+            <p>第五章·结果与新开始</p>
+        </div>
+        <div class="script-list">
+        <button class="script-row" onclick="openShot('SC21');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC21</span>
+            <span class="row-title">面对面试官</span>
+            <span class="row-time">01:00–01:04</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC22');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC22</span>
+            <span class="row-title">走出大楼</span>
+            <span class="row-time">01:04–01:08</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC23');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC23</span>
+            <span class="row-title">收到 Offer</span>
+            <span class="row-time">01:08–01:11</span>
+        </button>
+        
+        <button class="script-row" onclick="openShot('SC24');switchTab('gallery',document.querySelector('[data-tabbtn=gallery]'))">
+            <span class="row-id">SC24</span>
+            <span class="row-title">阳台新开始</span>
+            <span class="row-time">01:11–01:15</span>
+        </button>
+        </div>
+    </div>
+    
+        </div>
+      </section>
+
+      <section class="tab" id="tab-characters">
+        <div class="section-title"><div><h3>角色设定体系</h3><p>点击角色卡切换完整人物资料。</p></div></div>
+        <div class="system-grid">
+          <button class="system-card active" onclick="showSystem('character',0,this)"><img src="images/enemy-018-8b6ec4fc9bcc.webp"><h4>林小满</h4><p>主角 / 22岁应届毕业生</p></button>
+          <button class="system-card" onclick="showSystem('character',1,this)"><img src="images/enemy-011-77b7add2fb5e.webp"><h4>母亲</h4><p>画外角色 / 家庭牵挂与压力</p></button>
+          <button class="system-card" onclick="showSystem('character',2,this)"><img src="images/enemy-021-11fa892bb340.webp"><h4>面试官</h4><p>现实筛选者 / 专业而直接</p></button>
+          <button class="system-card" onclick="showSystem('character',3,this)"><img src="images/enemy-001-7c054c99d035.webp"><h4>广州</h4><p>隐形角色 / 巨大的外部世界</p></button>
+        </div>
+        <div class="panel system-detail">
+          <img id="characterImage" src="images/enemy-018-8b6ec4fc9bcc.webp">
+          <div><h2>CHARACTER DETAIL</h2><h3 id="characterTitle">林小满</h3><p id="characterText">圆中带方脸，暖黄调肤色，透明浅粉色眼镜，眼下青灰疲惫。服装以褪色灰色T恤、黑色卡西欧电子表和军绿色帆布包为核心。紧张时会抿嘴、别碎发、缩肩；崩溃时克制而不夸张。</p></div>
+        </div>
+      </section>
+
+      <section class="tab" id="tab-locations">
+        <div class="section-title"><div><h3>场景设定体系</h3><p>点击场景卡查看空间、光线与叙事作用。</p></div></div>
+        <div class="system-grid">
+          <button class="system-card active" onclick="showSystem('location',0,this)"><img src="images/enemy-002-59770486e1df.webp"><h4>12㎡出租屋</h4><p>全片核心空间</p></button>
+          <button class="system-card" onclick="showSystem('location',1,this)"><img src="images/enemy-017-34cab1bdcb2f.webp"><h4>工作桌面</h4><p>努力痕迹的视觉中心</p></button>
+          <button class="system-card" onclick="showSystem('location',2,this)"><img src="images/enemy-019-2f1e27aaf3d2.webp"><h4>广州地铁</h4><p>人潮与奔赴的压力空间</p></button>
+          <button class="system-card" onclick="showSystem('location',3,this)"><img src="images/enemy-020-9171f3d984d4.webp"><h4>面试等待区</h4><p>冷灰色现实筛选空间</p></button>
+          <button class="system-card" onclick="showSystem('location',4,this)"><img src="images/enemy-024-d1796a28db3e.webp"><h4>阳台</h4><p>结尾与新开始</p></button>
+        </div>
+        <div class="panel system-detail">
+          <img id="locationImage" src="images/enemy-002-59770486e1df.webp">
+          <div><h2>LOCATION DETAIL</h2><h3 id="locationTitle">12㎡出租屋</h3><p id="locationText">床、工作桌、暖台灯、铁栏窗、衣架和军绿色帆布包固定出现。夜间采用台灯暖光与屏幕冷光对冲，空间越局促，人物的梦想越显得拥挤。</p></div>
+        </div>
+      </section>
+
+      <section class="tab" id="tab-sound">
+        <div class="section-title"><div><h3>声音设计</h3><p>点击播放按钮切换预览状态。</p></div></div>
+        <div class="panel">
+          <button class="sound-card" onclick="toggleSound(this,'环境层')"><span>◉</span><div><h4>环境层</h4><p>城市低频、远处车流、空调外机、冰箱嗡鸣。</p></div><b>播放</b></button>
+          <button class="sound-card" onclick="toggleSound(this,'动作层')"><span>▶</span><div><h4>动作层</h4><p>手机震动、鼠标点击、键盘、筷子、脚步与地铁门。</p></div><b>播放</b></button>
+          <button class="sound-card" onclick="toggleSound(this,'人物层')"><span>◖</span><div><h4>人物层</h4><p>呼吸、吞咽、停顿、母亲电话与面试对话。</p></div><b>播放</b></button>
+          <button class="sound-card" onclick="toggleSound(this,'音乐层')"><span>♫</span><div><h4>音乐层</h4><p>最低谷减少音乐，结尾只保留轻微和声。</p></div><b>播放</b></button>
+        </div>
+        <div class="section-title"><div><h3>服化道与关键物件</h3><p>点击物件卡查看使用规则。</p></div></div>
+        <div class="system-grid">
+          <button class="system-card active" onclick="showSystem('prop',0,this)"><img src="images/enemy-014-c970ed94e40c.webp"><h4>透明浅粉眼镜</h4><p>人物识别核心</p></button>
+          <button class="system-card" onclick="showSystem('prop',1,this)"><img src="images/enemy-013-807630241127.webp"><h4>黑色卡西欧电子表</h4><p>时间焦虑与生活感</p></button>
+          <button class="system-card" onclick="showSystem('prop',2,this)"><img src="images/enemy-022-956a2df51c48.webp"><h4>军绿色帆布包</h4><p>贯穿出租屋、地铁与面试</p></button>
+          <button class="system-card" onclick="showSystem('prop',3,this)"><img src="images/enemy-003-380bc6a3e19d.webp"><h4>作品集</h4><p>自我价值的具象化</p></button>
+        </div>
+        <div class="panel system-detail">
+          <img id="propImage" src="images/enemy-014-c970ed94e40c.webp">
+          <div><h2>PROP DETAIL</h2><h3 id="propTitle">透明浅粉眼镜</h3><p id="propText">眼镜是林小满的核心识别特征。镜片反光用来承载招聘网站、拒信、面试邀请和城市灯光，但反光不能遮住眼睛的真实情绪。</p></div>
+        </div>
+      </section>
+
+      <section class="tab" id="tab-plan">
+        <div class="section-title"><div><h3>制作计划</h3><p>每项任务均可点击切换完成状态。</p></div></div>
+        <div class="panel">
+          <button class="plan-card done" onclick="togglePlan(this)"><i></i><div><h4>01. 完整剧本与24镜头定稿</h4><p>故事结构、镜头编号和时间码统一。</p></div><b>已完成</b></button>
+          <button class="plan-card done" onclick="togglePlan(this)"><i></i><div><h4>02. 24张分镜图片分类</h4><p>所有镜头均有图片，不保留空位。</p></div><b>已完成</b></button>
+          <button class="plan-card done" onclick="togglePlan(this)"><i></i><div><h4>03. 镜头参数与提示词</h4><p>画面、剧本、镜头、情绪与AI提示词对应。</p></div><b>已完成</b></button>
+          <button class="plan-card done" onclick="togglePlan(this)"><i></i><div><h4>04. 角色、场景与服化道体系</h4><p>人物连续性与固定道具已整理。</p></div><b>已完成</b></button>
+          <button class="plan-card done" onclick="togglePlan(this)"><i></i><div><h4>05. 声音与转场体系</h4><p>环境、动作、人物与音乐层级已整理。</p></div><b>已完成</b></button>
+          <button class="plan-card done" onclick="togglePlan(this)"><i></i><div><h4>06. 网站交互与最终导出</h4><p>所有导航、卡片、筛选与详情区域可点击。</p></div><b>已完成</b></button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this) closeOverlay()">
+  <button onclick="closeOverlay()">×</button>
+  <img id="overlayImage" src="images/enemy-001-7c054c99d035.webp" alt="大图预览">
+</div>
+<div class="toast" id="toast">已复制</div>
+
+<script>
+const SHOTS = [{"id": "SC01", "ep": "EP01", "section": "第一章·抵达广州", "title": "广州凌晨", "time": "00:00–00:02", "scene": "城市建立镜头。高楼、路灯、凌晨天际线，广州像一个巨大系统开始运转。", "script": "广州的夜还没结束，新的一天已经开始。林小满站在这座城市之外，像刚被放进齿轮里的一颗小零件。", "camera": "超广角远景 / 静止", "emotion": "渺小、陌生", "prompt": "Cinematic wide city skyline at night, Guangzhou atmosphere, lonely graduate tone, realistic moody film still.", "image": "images/enemy-001-7c054c99d035.webp"}, {"id": "SC02", "ep": "EP01", "section": "第一章·抵达广州", "title": "12平方米出租屋", "time": "00:02–00:06", "scene": "逼仄出租屋内部，床、桌子、台灯、衣架与旧帆布包全部入镜。", "script": "她的世界只有十二平方米。够放下一张床，一张桌子，一个帆布包，和一整个不肯认输的夏天。", "camera": "中远景 / 缓慢推进", "emotion": "局促、真实", "prompt": "Tiny rental room, young Chinese female graduate, cramped but warm, realistic cinematic interior.", "image": "images/enemy-002-59770486e1df.webp"}, {"id": "SC03", "ep": "EP01", "section": "第一章·抵达广州", "title": "作品集细节", "time": "00:06–00:10", "scene": "手部特写，翻页、笔记、修改痕迹、咖啡渍和折角。", "script": "她把所有能证明自己的东西，一页一页摆在桌上。努力有时候并不发光，只会留下笔迹和折痕。", "camera": "微距特写 / 静止", "emotion": "认真、用力", "prompt": "Macro details of portfolio pages, handwritten notes, young woman hands, cinematic realism.", "image": "images/enemy-003-380bc6a3e19d.webp"}, {"id": "SC04", "ep": "EP01", "section": "第一章·抵达广州", "title": "广州，加油", "time": "00:10–00:15", "scene": "暖灯桌面，便利贴、自我提醒、简历旁边的手机与台灯形成视觉中心。", "script": "她给自己留下一句最简单的话：‘广州，加油。’好像这样，就能把害怕压下去一点。", "camera": "俯拍近景 / 慢推", "emotion": "自我鼓劲", "prompt": "Warm desk with notes and encouragement, realistic night study desk, young graduate mood.", "image": "images/enemy-004-302db049cd33.webp"}, {"id": "SC05", "ep": "EP01", "section": "第一章·抵达广州", "title": "第一次投递", "time": "00:15–00:20", "scene": "电脑屏幕前，鼠标停留在发送按钮，小满呼吸后点击。", "script": "第一次投递简历，她像按下一个微不足道却决定命运的按钮。", "camera": "中近景 / 轻微手持", "emotion": "期待、紧张", "prompt": "Young woman sending resume at night, laptop glow, tense first application, cinematic realism.", "image": "images/enemy-005-6096d7264b15.webp"}, {"id": "SC06", "ep": "EP02", "section": "第二章·拒信循环", "title": "手机震动", "time": "00:20–00:23", "scene": "桌面与手机震动的瞬间，屏幕亮起。", "script": "每一次震动都像一次可能。她总会下意识屏住呼吸。", "camera": "物件特写 / 硬切", "emotion": "期待", "prompt": "Phone vibration on desk, hopeful notification, cinematic object close-up.", "image": "images/enemy-006-3938491a7763.webp"}, {"id": "SC07", "ep": "EP02", "section": "第二章·拒信循环", "title": "第一封拒信", "time": "00:23–00:28", "scene": "她对着亮起的屏幕看见拒绝，神情慢慢落下。", "script": "但很多时候，亮起来的不是机会，而是礼貌地告诉你——这次也不是你。", "camera": "脸部特写 / 静止", "emotion": "失落", "prompt": "Young graduate reading rejection notice, natural skin texture, subtle heartbreak, realistic film still.", "image": "images/enemy-007-a6e9afde3de3.webp"}, {"id": "SC08", "ep": "EP02", "section": "第二章·拒信循环", "title": "同学 Offer 群聊", "time": "00:28–00:32", "scene": "同学群里不断弹出上岸消息，屏幕反光映在脸上。", "script": "有人已经拿到 Offer，有人开始入职培训。只有她还在刷新页面，像没被选中的候补。", "camera": "手机屏+脸部反光 / 过肩", "emotion": "比较、落差", "prompt": "Night group chat with classmates getting offers, lonely viewer, cinematic phone light.", "image": "images/enemy-008-bbfa18ab133e.webp"}, {"id": "SC09", "ep": "EP02", "section": "第二章·拒信循环", "title": "假装祝福", "time": "00:32–00:36", "scene": "输入‘恭喜’，删掉，重打，再发送。", "script": "她还是打下了‘恭喜呀’，像所有懂事的大人一样，把自己的难过藏在标点后面。", "camera": "手部与屏幕特写", "emotion": "克制、隐忍", "prompt": "Close-up of typing congratulations message, bittersweet emotion, realistic cinematic detail.", "image": "images/enemy-009-5adfdde6dcef.webp"}, {"id": "SC10", "ep": "EP02", "section": "第二章·拒信循环", "title": "凌晨修改作品集", "time": "00:36–00:45", "scene": "深夜伏案，版本一遍遍迭代，房间只剩屏幕和台灯。", "script": "第七版、第十九版、第三十七版。她不知道到底是作品不够好，还是自己还不够像一个被需要的人。", "camera": "中景 / 缓慢拉远", "emotion": "消耗、坚持", "prompt": "Young Chinese female graduate revising portfolio late night, messy room, laptop light, cinematic realism.", "image": "images/enemy-010-2e88df8a6471.webp"}, {"id": "SC11", "ep": "EP03", "section": "第三章·自我怀疑", "title": "父母电话", "time": "00:45–00:47", "scene": "手机来电显示‘妈妈’，她手指悬停，没有立刻接。", "script": "最难回答的，从来不是面试官，而是家里那句：‘最近怎么样？’", "camera": "手部特写 / 静止", "emotion": "愧疚、压力", "prompt": "Incoming call from mother, hesitant hand, cinematic close-up, emotional realism.", "image": "images/enemy-011-77b7add2fb5e.webp"}, {"id": "SC12", "ep": "EP03", "section": "第三章·自我怀疑", "title": "一个人吃饭", "time": "00:47–00:49", "scene": "深夜独自吃廉价外卖，桌上还摊着资料。", "script": "一边吃饭，一边看岗位要求。城市没有停下，她也不敢停。", "camera": "中景 / 轻推", "emotion": "孤独、麻木", "prompt": "Young woman eating alone at night while working, cheap takeout, realistic cinematic mood.", "image": "images/enemy-012-5f893783e8c6.webp"}, {"id": "SC13", "ep": "EP03", "section": "第三章·自我怀疑", "title": "招聘网站刷新", "time": "00:49–00:51", "scene": "电脑屏幕职位列表不断刷新，几乎没变化。", "script": "刷新，刷新，再刷新。像在等命运主动给自己回一个消息。", "camera": "屏幕与侧脸 / 过肩", "emotion": "焦灼", "prompt": "Job search website refreshing late at night, anxious graduate, realistic cinematic over-shoulder shot.", "image": "images/enemy-013-807630241127.webp"}, {"id": "SC14", "ep": "EP03", "section": "第三章·自我怀疑", "title": "深夜崩溃", "time": "00:51–00:53", "scene": "她疲惫到趴下，情绪失控，灯光与阴影压下来。", "script": "有一瞬间，她真的想回家。不是不努力了，是太努力也还没有结果。", "camera": "近景 / 静止", "emotion": "崩溃", "prompt": "Emotional breakdown at night, exhausted young woman in small room, cinematic realism.", "image": "images/enemy-014-c970ed94e40c.webp"}, {"id": "SC15", "ep": "EP03", "section": "第三章·自我怀疑", "title": "重新打开电脑", "time": "00:53–00:55", "scene": "她抬起头，再一次把电脑拉回自己面前。", "script": "可她没有真的放弃。她只是擦掉眼泪，重新坐好。", "camera": "中景 / 慢推", "emotion": "回弹、继续", "prompt": "Young woman returning to work after breakdown, warm room light, resilient mood, cinematic still.", "image": "images/enemy-015-6e575c66c1ac.webp"}, {"id": "SC16", "ep": "EP04", "section": "第四章·重新出发", "title": "面试邀请", "time": "00:55–00:56", "scene": "夜里手机亮起，邮件通知映在她的眼镜上。", "script": "就在她快要不抱希望的时候，一封面试邀请穿过夜色，准确地落在她手里。", "camera": "中近景 / 静止", "emotion": "意外、警觉", "prompt": "Young Chinese female graduate receives interview invitation on phone at night, glasses reflection, cinematic realism.", "image": "images/enemy-016-65f769cb2f4b.webp"}, {"id": "SC17", "ep": "EP04", "section": "第四章·重新出发", "title": "整理简历", "time": "00:56–00:57", "scene": "她重新修正简历与作品集，把夸张词删掉，把真正做过的事留下。", "script": "她第一次不再想‘怎么显得厉害’，而是认真想‘我究竟做过什么’。", "camera": "俯拍近景 / 静止", "emotion": "冷静、诚实", "prompt": "Overhead cinematic desk scene revising resume and portfolio, warm lamp, realistic Chinese graduate.", "image": "images/enemy-017-34cab1bdcb2f.webp"}, {"id": "SC18", "ep": "EP04", "section": "第四章·重新出发", "title": "镜中练习", "time": "00:57–00:58", "scene": "镜子前整理碎发，练习自我介绍。", "script": "她对着镜子，一遍遍念自己的名字。像是在劝自己相信——我可以进去，我也值得被听见。", "camera": "镜像构图 / 静止", "emotion": "鼓起勇气", "prompt": "Young Chinese woman practicing interview in mirror, messy bun, glasses, cinematic self-reflection.", "image": "images/enemy-018-8b6ec4fc9bcc.webp"}, {"id": "SC19", "ep": "EP04", "section": "第四章·重新出发", "title": "赶往面试", "time": "00:58–00:59", "scene": "地铁站里的人潮，小满背着帆布包穿行其中。", "script": "她穿过拥挤的地铁站，像很多来这座城市的人一样，带着一点慌张和一点不肯回头。", "camera": "广角跟拍 / 轻微手持", "emotion": "奔赴、悬而未决", "prompt": "Busy subway station, young Chinese female graduate heading to interview, cinematic realistic wide shot.", "image": "images/enemy-019-2f1e27aaf3d2.webp"}, {"id": "SC20", "ep": "EP04", "section": "第四章·重新出发", "title": "面试等待", "time": "00:59–01:00", "scene": "会议室外的长椅上，她抱着作品集等待。", "script": "门外十秒，比她过去无数个凌晨都长。", "camera": "侧面中景 / 静止", "emotion": "压迫、紧绷", "prompt": "Young Chinese female graduate waiting outside interview room holding portfolio, cinematic realism.", "image": "images/enemy-020-9171f3d984d4.webp"}, {"id": "SC21", "ep": "EP05", "section": "第五章·结果与新开始", "title": "面对面试官", "time": "01:00–01:04", "scene": "她开始真正讲自己的项目，不再机械背诵。", "script": "这一次，她没有背答案。她只是认真讲自己做过的事，和为什么想把它做好。", "camera": "双人中景 / 过肩", "emotion": "真诚、稳定", "prompt": "Office interview conversation, young Chinese woman presenting portfolio, cinematic realistic medium shot.", "image": "images/enemy-021-11fa892bb340.webp"}, {"id": "SC22", "ep": "EP05", "section": "第五章·结果与新开始", "title": "走出大楼", "time": "01:04–01:08", "scene": "她从大楼门口走出来，光线更亮，但结果还没落地。", "script": "走出大楼时，她还不知道结果。但她知道，至少这一次，她完整地说出了自己。", "camera": "远中景 / 跟随", "emotion": "松一口气", "prompt": "Young Chinese female graduate walking out of office building after interview, reflective city light, cinematic wide shot.", "image": "images/enemy-022-956a2df51c48.webp"}, {"id": "SC23", "ep": "EP05", "section": "第五章·结果与新开始", "title": "收到 Offer", "time": "01:08–01:11", "scene": "深夜电脑前，她看着屏幕上的录用消息，先是愣住，再捂住嘴。", "script": "那条消息真的来时，她反而不敢立刻相信。像太久没被命运温柔对待的人，第一反应总是迟疑。", "camera": "中近景 / 静止", "emotion": "不敢相信、释然", "prompt": "Young Chinese woman receives job offer at night, emotional reaction in front of laptop, cinematic realism.", "image": "images/enemy-023-1d9c911862f6.webp"}, {"id": "SC24", "ep": "EP05", "section": "第五章·结果与新开始", "title": "阳台新开始", "time": "01:11–01:15", "scene": "清晨或黄昏阳台上，她望向城市，风吹动碎发。", "script": "天亮了。人还是那个人，城市还是那座城市。但她终于不再觉得自己被世界挡在门外。", "camera": "中远景 / 缓慢拉远", "emotion": "轻松、重新开始", "prompt": "Young Chinese female graduate on balcony after getting offer, soft sunrise light, hopeful cinematic realism.", "image": "images/enemy-024-d1796a28db3e.webp"}];
+let currentShotId = "SC01";
+
+function byId(id) {
+  return document.getElementById(id);
+}
+function switchTab(tabName, btn) {
+  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+  byId('tab-' + tabName).classList.add('active');
+  document.querySelectorAll('[data-tabbtn]').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+function getShot(id) {
+  return SHOTS.find(s => s.id === id);
+}
+function openShot(id) {
+  currentShotId = id;
+  const shot = getShot(id);
+  if (!shot) return;
+  document.querySelectorAll('.shot-card').forEach(card => card.classList.toggle('active', card.dataset.id === id));
+  byId('detailImage').src = shot.image;
+  byId('detailTitle').textContent = shot.title;
+  byId('detailId').textContent = shot.id;
+  byId('detailSub').textContent = shot.section + ' · ' + shot.time;
+  byId('detailEp').textContent = shot.ep;
+  byId('detailTime').textContent = shot.time;
+  byId('detailScene').textContent = shot.scene;
+  byId('detailCamera').textContent = shot.camera;
+  byId('detailEmotion').textContent = shot.emotion;
+  byId('detailScript').textContent = shot.script;
+  byId('detailPrompt').textContent = shot.prompt;
+}
+function getCurrentIndex() {
+  return SHOTS.findIndex(s => s.id === currentShotId);
+}
+function prevShot() {
+  let i = getCurrentIndex(); if (i < 0) i = 0;
+  const target = SHOTS[(i - 1 + SHOTS.length) % SHOTS.length].id;
+  switchTab('gallery', document.querySelector('[data-tabbtn=gallery]'));
+  openShot(target);
+}
+function nextShot() {
+  let i = getCurrentIndex(); if (i < 0) i = 0;
+  const target = SHOTS[(i + 1) % SHOTS.length].id;
+  switchTab('gallery', document.querySelector('[data-tabbtn=gallery]'));
+  openShot(target);
+}
+function filterShots(ep, btn) {
+  document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('#galleryGrid .shot-card').forEach(card => {
+    const show = ep === 'ALL' || card.dataset.ep === ep;
+    card.classList.toggle('hidden', !show);
+  });
+  switchTab('gallery', document.querySelector('[data-tabbtn=gallery]'));
+}
+function scrollToTopAndShow(ep) {
+  const order = ['ALL','EP01','EP02','EP03','EP04','EP05'];
+  const buttons = document.querySelectorAll('.side-btn');
+  filterShots(ep, buttons[order.indexOf(ep)]);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function openImage(src) {
+  byId('overlayImage').src = src;
+  byId('overlay').classList.add('open');
+}
+function openCurrentImage() {
+  const shot = getShot(currentShotId);
+  if (shot) openImage(shot.image);
+}
+function closeOverlay() {
+  byId('overlay').classList.remove('open');
+}
+function copyCurrentPrompt() {
+  const shot = getShot(currentShotId);
+  if (!shot) return;
+  navigator.clipboard.writeText(shot.prompt).then(() => showToast('当前镜头提示词已复制'));
+}
+function showToast(text) {
+  const t = byId('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1200);
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') prevShot();
+  if (e.key === 'ArrowRight') nextShot();
+  if (e.key === 'Escape') closeOverlay();
+});
+openShot('SC01');
+
+const SYSTEM_DATA = {"character": [{"title": "林小满", "text": "圆中带方脸，暖黄调肤色，透明浅粉色眼镜，眼下青灰疲惫。服装以褪色灰色T恤、黑色卡西欧电子表和军绿色帆布包为核心。紧张时会抿嘴、别碎发、缩肩；崩溃时克制而不夸张。", "image": "images/enemy-018-8b6ec4fc9bcc.webp"}, {"title": "母亲", "text": "不直接出镜，通过电话声音建立家庭牵挂、现实期待和返回故乡的安全感。声音越温和，林小满的沉默越有压力。", "image": "images/enemy-011-77b7add2fb5e.webp"}, {"title": "面试官", "text": "专业、直接、克制，不塑造成反派。她代表真实职场的筛选机制，也迫使林小满从背答案转向诚实表达。", "image": "images/enemy-021-11fa892bb340.webp"}, {"title": "广州", "text": "城市作为隐形角色持续运转。夜景、地铁、办公楼和旧出租屋形成巨大尺度，衬托人物的渺小与坚持。", "image": "images/enemy-001-7c054c99d035.webp"}], "location": [{"title": "12㎡出租屋", "text": "床、工作桌、暖台灯、铁栏窗、衣架和军绿色帆布包固定出现。夜间采用台灯暖光与屏幕冷光对冲。", "image": "images/enemy-002-59770486e1df.webp"}, {"title": "工作桌面", "text": "作品集、简历、便利贴、杯子、外卖盒、键盘和手表构成努力的物证。适合俯拍、微距与手部特写。", "image": "images/enemy-017-34cab1bdcb2f.webp"}, {"title": "广州地铁", "text": "人流密集、冷白光、空间压迫。使用广角跟拍与轻微手持，表现她被城市推着向前。", "image": "images/enemy-019-2f1e27aaf3d2.webp"}, {"title": "面试等待区", "text": "冷灰色办公环境与出租屋暖黑色形成对比。长椅、玻璃门和会议室标识强化等待压力。", "image": "images/enemy-020-9171f3d984d4.webp"}, {"title": "阳台", "text": "结尾空间。自然光取代屏幕冷光，远处城市仍然巨大，但人物已经不再退缩。", "image": "images/enemy-024-d1796a28db3e.webp"}], "prop": [{"title": "透明浅粉眼镜", "text": "人物识别核心。镜片反光承载招聘网站、拒信、邀请和城市灯光，但不能遮挡眼睛。", "image": "images/enemy-014-c970ed94e40c.webp"}, {"title": "黑色卡西欧电子表", "text": "强化时间焦虑和应届生真实生活质感，主要在刷新网页、修改简历和赶面试时出现。", "image": "images/enemy-013-807630241127.webp"}, {"title": "军绿色帆布包", "text": "贯穿出租屋、地铁、等待区与走出大楼，连接人物的生活状态和职业旅程。", "image": "images/enemy-022-956a2df51c48.webp"}, {"title": "作品集", "text": "全片最重要的职业道具，是努力、自我价值和面试表达的具象化。", "image": "images/enemy-003-380bc6a3e19d.webp"}]};
+function showSystem(type,index,btn){
+  const data=SYSTEM_DATA[type][index];
+  const prefix=type==='character'?'character':type==='location'?'location':'prop';
+  document.getElementById(prefix+'Image').src=data.image;
+  document.getElementById(prefix+'Title').textContent=data.title;
+  document.getElementById(prefix+'Text').textContent=data.text;
+  btn.closest('.tab').querySelectorAll('.system-card').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+}
+function toggleSound(btn,name){
+  btn.classList.toggle('playing');
+  btn.querySelector('b').textContent=btn.classList.contains('playing')?'停止':'播放';
+  showToast(name+(btn.classList.contains('playing')?'开始预览':'停止预览'));
+}
+function togglePlan(btn){
+  btn.classList.toggle('done');
+  btn.querySelector('b').textContent=btn.classList.contains('done')?'已完成':'进行中';
+}
+
+</script>
+</body>
+</html>

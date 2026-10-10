@@ -1,0 +1,35 @@
+{
+  "3d": [
+    "3d_01.jpg",
+    "3d_02.jpg",
+    "3d_03.jpg",
+    "3d_04.jpg",
+    "3d_05.jpg",
+    "3d_06.jpg",
+    "3d_07.jpg",
+    "3d_08.jpg",
+    "3d_09.jpg",
+    "3d_10.jpg",
+    "3d_11.jpg",
+    "3d_12.jpg",
+    "3d_13.jpg"
+  ],
+  "real": [
+    "real_01.jpg",
+    "real_02.jpg",
+    "real_03.jpg",
+    "real_04.jpg",
+    "real_05.jpg",
+    "real_06.jpg",
+    "real_07.jpg",
+    "real_08.jpg",
+    "real_09.jpg",
+    "real_10.jpg",
+    "real_11.jpg"
+  ],
+  "2d": [
+    "2d_01.jpg",
+    "2d_02.jpg",
+    "2d_03.jpg"
+  ]
+}

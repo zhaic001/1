@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资海春 · 摄影师 / 剪辑后期 / AI 短剧制作人</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0d0f'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='18' fill='%23d4a853' text-anchor='middle' font-weight='700'%3E资%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --bg:#0c0c0e; --bg2:#141418; --card:#1a1a20; --card2:#20202a;
+  --line:#2a2a34; --text:#e8e6e1; --mute:#9a979f; --dim:#6a6872;
+  --accent:#d4a853; --accent2:#b8860b; --gold-grad:linear-gradient(135deg,#e8c376 0%,#d4a853 50%,#a87c2e 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  line-height:1.65; overflow-x:hidden;
+}
+.serif{font-family:'Noto Serif SC',serif}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px}
+section{padding:88px 0; border-top:1px solid var(--line)}
+h2.sec{
+  font-family:'Noto Serif SC',serif; font-size:34px; font-weight:700; letter-spacing:1px;
+  margin-bottom:8px;
+}
+.sec-sub{color:var(--mute); font-size:14px; letter-spacing:3px; text-transform:uppercase; margin-bottom:40px}
+.gold{background:var(--gold-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(12,12,14,.82); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:1180px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; justify-content:space-between}
+.nav-logo{font-family:'Noto Serif SC',serif; font-weight:700; font-size:18px; color:var(--text)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex; gap:26px; align-items:center}
+.nav-links a{color:var(--mute); text-decoration:none; font-size:13.5px; transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{
+  background:var(--gold-grad); color:#1a1408 !important; padding:8px 18px;
+  border-radius:999px; font-weight:500; font-size:13px;
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh; display:flex; align-items:center; position:relative;
+  background:
+    radial-gradient(ellipse at 75% 30%, rgba(212,168,83,.12), transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(80,60,120,.18), transparent 50%),
+    var(--bg);
+  padding-top:70px;
+}
+.hero::before{
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:60px 60px; pointer-events:none;
+}
+.hero-in{position:relative; z-index:1; width:100%}
+.hero-tag{
+  display:inline-block; padding:6px 14px; border:1px solid var(--line);
+  border-radius:999px; font-size:12px; letter-spacing:3px; color:var(--accent);
+  margin-bottom:28px; text-transform:uppercase;
+}
+.hero h1{
+  font-family:'Noto Serif SC',serif; font-size:clamp(48px,8vw,96px);
+  font-weight:900; line-height:1.05; letter-spacing:4px; margin-bottom:20px;
+}
+.hero .role{
+  font-size:clamp(16px,2vw,22px); color:var(--mute); margin-bottom:28px; letter-spacing:2px;
+}
+.hero .role b{color:var(--text); font-weight:500}
+.hero p.desc{max-width:640px; color:var(--mute); font-size:15.5px; line-height:1.9; margin-bottom:40px}
+.hero-btns{display:flex; gap:16px; flex-wrap:wrap}
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:13px 26px;
+  border-radius:999px; font-size:14.5px; text-decoration:none; transition:transform .2s, box-shadow .2s;
+  cursor:pointer; border:none;
+}
+.btn-pri{background:var(--gold-grad); color:#1a1408; font-weight:600}
+.btn-pri:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,168,83,.3)}
+.btn-ghost{background:transparent; color:var(--text); border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent); color:var(--accent)}
+.hero-meta{
+  margin-top:56px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+  padding-top:32px; border-top:1px solid var(--line);
+}
+.hm{font-size:13px; color:var(--dim)}
+.hm b{display:block; font-size:15px; color:var(--text); margin-top:4px; font-weight:500}
+
+/* ===== STATS ===== */
+.stats{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:16px; overflow:hidden;
+}
+.stat{background:var(--bg2); padding:36px 24px; text-align:center}
+.stat .num{
+  font-family:'Noto Serif SC',serif; font-size:42px; font-weight:700;
+  background:var(--gold-grad); -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; line-height:1;
+}
+.stat .lbl{color:var(--mute); font-size:13px; margin-top:10px; letter-spacing:1px}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:start}
+.about p{color:var(--mute); font-size:15px; line-height:1.95; margin-bottom:16px}
+.about p b{color:var(--text); font-weight:500}
+.skill-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px}
+.tag{
+  padding:7px 14px; background:var(--card); border:1px solid var(--line);
+  border-radius:8px; font-size:13px; color:var(--text);
+}
+.tag.g{border-color:rgba(212,168,83,.4); color:var(--accent)}
+
+/* ===== WORKS ===== */
+.work-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px}
+.work-card{
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  overflow:hidden; transition:transform .25s, border-color .25s;
+}
+.work-card:hover{transform:translateY(-4px); border-color:rgba(212,168,83,.4)}
+.wc-cover{
+  height:220px; overflow:hidden; position:relative; background:#000;
+}
+.wc-cover img{
+  width:100%; height:100%; object-fit:cover; object-position:center 25%;
+  transition:transform .5s;
+}
+.work-card:hover .wc-cover img{transform:scale(1.04)}
+.wc-cover .badge{
+  position:absolute; top:14px; left:14px; padding:4px 10px;
+  background:rgba(0,0,0,.7); backdrop-filter:blur(6px);
+  border:1px solid rgba(212,168,83,.4); border-radius:6px;
+  font-size:11px; color:var(--accent); letter-spacing:1.5px;
+}
+.wc-body{padding:22px 24px 26px}
+.wc-body h3{font-family:'Noto Serif SC',serif; font-size:19px; margin-bottom:8px; font-weight:700}
+.wc-meta{color:var(--dim); font-size:12.5px; margin-bottom:12px; letter-spacing:.5px}
+.wc-body p{color:var(--mute); font-size:13.5px; line-height:1.75}
+.wc-stats{display:flex; gap:18px; margin-top:16px; padding-top:14px; border-top:1px solid var(--line)}
+.wc-stats span{font-size:12.5px; color:var(--mute)}
+.wc-stats b{color:var(--accent); font-weight:600; margin-right:4px}
+.hit{
+  position:absolute; top:14px; right:14px; padding:5px 11px;
+  background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff;
+  border-radius:6px; font-size:11px; font-weight:600; letter-spacing:1px;
+}
+.eps-toggle{
+  margin-top:16px; width:100%; padding:10px;
+  background:rgba(212,168,83,.08); border:1px dashed rgba(212,168,83,.4);
+  border-radius:8px; color:var(--accent); font-size:13px; cursor:pointer;
+  transition:background .2s; font-family:inherit;
+}
+.eps-toggle:hover{background:rgba(212,168,83,.16)}
+.eps-list{
+  display:none; margin-top:12px; padding-top:12px;
+  border-top:1px dashed var(--line);
+  grid-template-columns:repeat(auto-fill,minmax(86px,1fr)); gap:8px;
+}
+.eps-list.on{display:grid}
+.ep{
+  padding:8px 6px; background:var(--bg); border:1px solid var(--line);
+  border-radius:6px; font-size:12px; color:var(--mute); cursor:pointer;
+  text-align:center; transition:all .15s;
+}
+.ep:hover{border-color:var(--accent); color:var(--accent)}
+.gal-item{cursor:zoom-in}
+
+/* ===== FEATURE ===== */
+.feat{
+  background:linear-gradient(180deg, var(--card) 0%, var(--bg2) 100%);
+  border:1px solid var(--line); border-radius:20px; padding:44px; margin-bottom:24px;
+}
+.feat-head{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:24px}
+.feat h3{font-family:'Noto Serif SC',serif; font-size:26px; font-weight:700}
+.feat .feat-tag{font-size:12px; color:var(--accent); letter-spacing:2px}
+.feat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:24px 0}
+.fg{background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px; padding:16px}
+.fg .n{font-size:26px; font-weight:700; color:var(--accent); font-family:'Noto Serif SC',serif}
+.fg .l{font-size:12px; color:var(--mute); margin-top:4px}
+.feat p{color:var(--mute); font-size:14px; line-height:1.85}
+.feat ul{margin-top:12px; padding-left:20px}
+.feat li{color:var(--mute); font-size:13.5px; line-height:1.9}
+.feat li b{color:var(--text); font-weight:500}
+
+/* ===== GALLERY ===== */
+.gal{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.gal-item{
+  position:relative; border-radius:12px; overflow:hidden; aspect-ratio:3/4;
+  background:#000;
+}
+.gal-item img{
+  width:100%; height:100%; object-fit:cover; object-position:top center;
+  transition:transform .4s;
+}
+.gal-item:hover img{transform:scale(1.05)}
+.gal-item .cap{
+  position:absolute; left:0; right:0; bottom:0; padding:30px 14px 12px;
+  background:linear-gradient(transparent, rgba(0,0,0,.85));
+  font-size:13px; font-weight:500;
+}
+.gal-item .cap small{display:block; color:var(--accent); font-size:11px; letter-spacing:1px; margin-top:2px}
+
+
+/* ===== REEL GRID ===== */
+.reel-tabs{display:flex;gap:10px;margin:24px 0 20px;flex-wrap:wrap}
+.reel-tab{
+  padding:10px 20px; border-radius:999px; cursor:pointer; font-size:14px;
+  background:var(--card); border:1px solid var(--line); color:var(--mute); transition:all .2s;
+}
+.reel-tab.on{background:var(--gold-grad); color:#1a1408; font-weight:600; border-color:transparent}
+.reel-grid{display:none; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px}
+.reel-grid.on{display:grid}
+.reel{
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  cursor:pointer; transition:all .15s; overflow:hidden; padding:0;
+}
+.reel:hover{border-color:var(--accent); transform:translateY(-2px)}
+.reel .thumb{
+  position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000;
+}
+.reel .thumb img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .3s;
+}
+.reel:hover .thumb img{transform:scale(1.05)}
+.reel .thumb::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,.5));
+}
+.reel .play{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:40px; height:40px; border-radius:50%; background:rgba(184,134,11,.9);
+  display:flex; align-items:center; justify-content:center; z-index:2;
+  transition:all .2s;
+}
+.reel:hover .play{background:var(--gold-grad); transform:translate(-50%,-50%) scale(1.1)}
+.reel .play svg{width:16px; height:16px; fill:#1a1408; margin-left:2px}
+.reel .meta{padding:10px 12px 12px}
+.reel b{font-size:13px; display:block; margin-bottom:3px}
+.reel small{color:var(--dim); font-size:11px}
+
+/* ===== AUDIO ===== */
+.aud-row{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+.aud{
+  display:flex; align-items:center; gap:14px; padding:14px 18px;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+}
+.aud .ic{
+  width:40px; height:40px; border-radius:50%; background:var(--gold-grad);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.aud .ic svg{width:18px; height:18px; fill:#1a1408}
+.aud .info{flex:1; min-width:0}
+.aud .info b{font-size:14px; display:block}
+.aud .info small{color:var(--dim); font-size:11.5px}
+.aud audio{width:180px; height:34px}
+
+/* ===== TIMELINE ===== */
+.edu-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.edu-card{
+  background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px;
+}
+.edu-card h4{font-size:16px; margin-bottom:6px}
+.edu-card .sub{color:var(--dim); font-size:13px; margin-bottom:14px}
+.honor{display:flex; flex-wrap:wrap; gap:8px}
+.honor span{
+  padding:6px 12px; background:rgba(212,168,83,.1); border:1px solid rgba(212,168,83,.3);
+  border-radius:6px; font-size:12.5px; color:var(--accent);
+}
+
+/* ===== FOOTER ===== */
+footer{
+  padding:72px 0 48px; border-top:1px solid var(--line);
+  background:var(--bg2); text-align:center;
+}
+footer .big{
+  font-family:'Noto Serif SC',serif; font-size:36px; font-weight:700; margin-bottom:12px;
+}
+footer p{color:var(--mute); font-size:14px; margin-bottom:28px}
+footer .links{display:flex; justify-content:center; gap:20px; flex-wrap:wrap}
+footer .links a{
+  color:var(--text); text-decoration:none; padding:10px 20px;
+  border:1px solid var(--line); border-radius:999px; font-size:13.5px; transition:all .2s;
+}
+footer .links a:hover{border-color:var(--accent); color:var(--accent)}
+.copy{margin-top:40px; color:var(--dim); font-size:12px}
+
+/* ===== TIMELINE ===== */
+.tl{position:relative; padding-left:28px}
+.tl::before{content:''; position:absolute; left:8px; top:8px; bottom:8px; width:2px; background:linear-gradient(180deg, var(--accent), var(--line))}
+.tl-item{position:relative; padding-bottom:28px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:''; position:absolute; left:-26px; top:6px; width:12px; height:12px;
+  border-radius:50%; background:var(--gold-grad); box-shadow:0 0 0 4px rgba(212,168,83,.15);
+}
+.tl-item .when{font-size:12px; color:var(--accent); letter-spacing:2px}
+.tl-item h4{font-size:17px; margin:4px 0}
+.tl-item .co{color:var(--mute); font-size:13.5px}
+.tl-item p{color:var(--dim); font-size:13px; margin-top:6px; line-height:1.7}
+
+/* ===== STYLE MATRIX ===== */
+.style-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:24px}
+.style-card{
+  background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px;
+  transition:border-color .2s, transform .2s;
+}
+.style-card:hover{border-color:rgba(212,168,83,.4); transform:translateY(-3px)}
+.style-card .sc-tag{
+  display:inline-block; padding:4px 10px; border-radius:5px; font-size:11px;
+  letter-spacing:2px; margin-bottom:14px;
+}
+.sc-tag.real{background:rgba(180,120,80,.15); color:#d4a076}
+.sc-tag.sd{background:rgba(120,150,220,.15); color:#8aa8e8}
+.sc-tag.anime{background:rgba(220,100,140,.15); color:#e88aa8}
+.style-card h4{font-size:18px; margin-bottom:10px}
+.style-card ul{padding-left:18px; color:var(--mute); font-size:13px; line-height:1.9}
+.style-card ul li{margin-bottom:4px}
+.style-card .core{
+  margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
+  font-size:12px; color:var(--accent);
+}
+.modal{
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(0,0,0,.92); align-items:center; justify-content:center; padding:40px;
+}
+.modal.on{display:flex}
+.modal video{max-width:90vw; max-height:85vh; border-radius:12px}
+.modal .close{
+  position:absolute; top:24px; right:32px; color:#fff; font-size:36px;
+  cursor:pointer; background:none; border:none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .hero-meta,.stats,.feat-grid{grid-template-columns:repeat(2,1fr)}
+  .work-grid,.about-grid,.aud-row,.edu-grid{grid-template-columns:1fr}
+  .gal{grid-template-columns:repeat(2,1fr)}
+  .nav-links a:not(.nav-cta){display:none}
+  section{padding:60px 0}
+  h2.sec{font-size:26px}
+  .feat{padding:28px}
+}
+@media print{
+  body{background:#fff; color:#000}
+  nav, .hero-btns, .modal, footer .links{display:none !important}
+  section{padding:20px 0; border-top:none}
+}
+
+/* Anti-download */
+img,video{-webkit-user-drag:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo">资<span>海春</span></div>
+    <div class="nav-links">
+      <a href="#about">关于</a>
+      <a href="#hits">战绩</a>
+      <a href="#career">经历</a>
+      <a href="#works">作品</a>
+      <a href="#assets">资产库</a>
+      <a href="#contact">联系</a>
+      <a class="nav-cta" href="assets/resume.pdf" download="zihai-chun-resume.pdf">下载 PDF 简历</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-tag">AI 短剧抽卡师 · PORTFOLIO 2026</div>
+    <h1 class="serif">资<span class="gold">海春</span></h1>
+    <div class="role">AI 短剧抽卡师 / 全流程制作 · <b>3D 漫为核心 · 伪真人 / 二维漫全能切换</b></div>
+    <p class="desc">
+      视觉设计垂直经验，从平面设计、摄影到 AI 短剧制作，具备从前期策划、美术定调到成片落地的全流程操盘能力。
+      曾统筹 <b style="color:var(--accent)">30+ 部 AI 漫剧项目</b>，培养 60+ 名跨行剪辑师；
+      代表作品《炼体狂人一锤砸穿修真界》红果 2000 万热度、<b style="color:var(--accent)">全网超 10 亿播放</b>，
+      《我在三界送外卖》全网超 8 亿，《红白新娘》全网 16 亿播放。
+    </p>
+    <div class="hero-btns">
+      <a class="btn btn-pri" href="assets/resume.pdf" download="zihai-chun-resume.pdf">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+        下载 PDF 简历
+      </a>
+      <a class="btn btn-ghost" href="#works">查看作品 →</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hm">所在城市<b>广东 · 广州 海珠区</b></div>
+      <div class="hm">期望方向<b>摄影 / 后期 / 新媒体</b></div>
+      <div class="hm">拍摄设备<b>自带 Sony 索尼相机</b></div>
+      <div class="hm">联系方式<b>18273496710</b></div>
+    </div>
+  </div>
+</header>
+<!-- ===== STATS ===== -->
+<section id="stats">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="num">10<span style="font-size:22px">亿+</span></div><div class="lbl">《炼体狂人》全网播放</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">部千万热度爆款（8-16亿）</div></div>
+      <div class="stat"><div class="num">30+</div><div class="lbl">统筹 AI 漫剧项目</div></div>
+      <div class="stat"><div class="num">60+</div><div class="lbl">培养跨行剪辑师</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-sub">About · 关于我</div>
+    <h2 class="sec">从拍摄到发布，一个人完成内容闭环</h2>
+    <div class="about-grid about">
+      <div>
+        <p><b>视觉传播设计科班出身</b>，毕业于湖南工艺美术职业大学视觉传播设计学院，
+        广告艺术设计（新媒体传播与策划方向）。理解画面表现、内容传播与用户注意力之间的关系。</p>
+        <p><b>独立完成全流程：</b>选题策划 → 脚本分镜 → 现场拍摄（自带索尼相机）→
+        素材整理 → 剪辑包装（PR / AE / 剪映）→ 字幕动效 → 竖屏成片输出。</p>
+        <p><b>AI 工具链熟练：</b>Codex、Pencil 调用 Skill 完成代码生成与创作流程协同；
+        即梦、海螺、小云雀、ChatGPT 辅助视频创作与脚本撰写；
+        seedance / kling 完成图像到视频的量产管线。</p>
+      </div>
+      <div>
+        <p style="margin-bottom:14px;color:var(--dim);font-size:13px;letter-spacing:2px">核心工具栈</p>
+        <div class="skill-tags">
+          <span class="tag g">Sony 索尼相机</span>
+          <span class="tag">Premiere Pro</span>
+          <span class="tag">After Effects</span>
+          <span class="tag">剪映</span>
+          <span class="tag g">Codex</span>
+          <span class="tag g">Pencil</span>
+          <span class="tag">即梦</span>
+          <span class="tag">海螺</span>
+          <span class="tag">小云雀</span>
+          <span class="tag">ChatGPT</span>
+          <span class="tag g">seedance 2.0 / 2.5</span>
+          <span class="tag">kling 3.0</span>
+          <span class="tag">UE5 / Lumen</span>
+          <span class="tag">Python 流水线</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HIT DRAMAS ===== -->
+<section id="hits" style="background:linear-gradient(180deg, var(--bg) 0%, #141018 100%)">
+  <div class="wrap">
+    <div class="sec-sub">Box Office · 导演战绩</div>
+    <h2 class="sec">三部千万热度爆款，<span class="gold">全网播放 8–16 亿</span></h2>
+    <div class="work-grid" style="margin-top:40px">
+
+      <div class="work-card" style="border:1px solid rgba(212,168,83,.35)">
+        <div class="wc-body" style="padding:30px 28px">
+          <div class="wc-meta" style="color:var(--accent);letter-spacing:2px">红果 2000 万热度</div>
+          <div style="margin:6px 0"><span style="display:inline-block;padding:3px 10px;border:1px solid var(--accent);border-radius:4px;font-size:12px;color:var(--accent)">参与剪辑 · 抽卡</span></div>
+          <h3 style="font-size:24px;margin:8px 0">炼体狂人一锤砸穿修真界</h3>
+          <p style="color:var(--mute);font-size:14px;line-height:1.8">玄幻 / 逆袭 / 爽文题材。从选题、剧本、分镜到 AI 生成全链路把控，
+          红果热度破 2000 万，全网播放突破 <b style="color:var(--accent)">10 亿+</b>。</p>
+          <div class="wc-stats">
+            <span><b>2000万</b>红果热度</span>
+            <span><b>10亿+</b>全网播放</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card" style="border:1px solid rgba(212,168,83,.35)">
+        <div class="wc-body" style="padding:30px 28px">
+          <div class="wc-meta" style="color:var(--accent);letter-spacing:2px">红果 1183 万热度</div>
+          <div style="margin:6px 0"><span style="display:inline-block;padding:3px 10px;border:1px solid var(--accent);border-radius:4px;font-size:12px;color:var(--accent)">参与剪辑 · 抽卡</span></div>
+          <h3 style="font-size:24px;margin:8px 0">我在三界送外卖</h3>
+          <p style="color:var(--mute);font-size:14px;line-height:1.8">都市奇幻 / 三界穿梭题材。红果热度 1183 万，
+          全网播放突破 <b style="color:var(--accent)">8 亿+</b>。</p>
+          <div class="wc-stats">
+            <span><b>1183万</b>红果热度</span>
+            <span><b>8亿+</b>全网播放</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card" style="border:1px solid rgba(212,168,83,.35);grid-column:1/-1">
+        <div class="wc-body" style="padding:30px 28px">
+          <div class="wc-meta" style="color:var(--accent);letter-spacing:2px">现映期 · 50万+ 点赞收藏</div>
+          <div style="margin:6px 0"><span style="display:inline-block;padding:3px 10px;border:1px solid var(--accent);border-radius:4px;font-size:12px;color:var(--accent)">参与剪辑 · 抽卡</span></div>
+          <h3 style="font-size:24px;margin:8px 0">红白新娘</h3>
+          <p style="color:var(--mute);font-size:14px;line-height:1.8">民俗悬疑 / 中式惊悚题材。现映期获 50 万+ 点赞收藏，
+          全网播放累计 <b style="color:var(--accent)">16 亿</b>。同期在榜：《清风渡我濯罪孽》999 万热度。</p>
+          <div class="wc-stats">
+            <span><b>50万+</b>点赞收藏</span>
+            <span><b>16亿</b>全网播放</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAREER TIMELINE ===== -->
+<section id="career">
+  <div class="wrap">
+    <div class="sec-sub">Career · 从业经历</div>
+    <h2 class="sec">从在校接单平面设计，到 AI 短剧编导</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:36px">
+      <div class="tl">
+        <div class="tl-item">
+          <div class="when">第五阶段 · 2025–至今</div>
+          <h4>全流程抽卡师 · AI 短剧编导</h4>
+          <div class="co">从一到九文化传媒</div>
+          <p>抽卡、剪辑、提示词、拆分一体的全流程岗位；统筹 30+ 部 AI 短剧项目，
+          培养 60+ 名剪辑师；以 3D 漫为核心，建立伪真人 / 3D 漫 / 二维漫三风格制作标准。</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">第四阶段</div>
+          <h4>自主承接婚庆拍摄</h4>
+          <div class="co">独立摄影师</div>
+          <p>独立接单婚礼跟拍、活动纪实，扛机器、布光、现场调度一把抓，练出扛压能力与现场叙事感。</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">第三阶段 · 在校期间</div>
+          <h4>益阳市小黑匣影视 · 参与拍摄</h4>
+          <div class="co">实习 / 跟组</div>
+          <p>进影视组参与正片拍摄，从助理做起，熟悉剧组流程、机位调度与现场导演节奏。</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">第二阶段</div>
+          <h4>益阳本地广告公司 · 合作</h4>
+          <div class="co">广告片 / 商单合作</div>
+          <p>与益阳不知名广告公司合作接商单，平面 + 拍摄双修，开始独立对接客户需求。</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">第一阶段 · 在校起点</div>
+          <h4>平面设计 · 自主接单</h4>
+          <div class="co">学生时代</div>
+          <p>在校就开始自己接平面设计私单，做海报、物料、UI 设计，攒下第一笔客户与作品集。</p>
+        </div>
+      </div>
+      <div>
+        <div class="sec-sub" style="margin-bottom:14px">核心职责</div>
+        <p style="color:var(--mute);font-size:14.5px;line-height:2;margin-bottom:16px">
+          负责公司 AI 漫剧项目组<b style="color:var(--text)">全局质量把控与统筹工作</b>，
+          覆盖都市、玄幻、逆袭、古风等题材，主攻<b style="color:var(--accent)">伪真人、3D 漫、二维漫三种视觉风格</b>，
+          以 3D 漫为核心竞争力。
+        </p>
+        <p style="color:var(--mute);font-size:14.5px;line-height:2;margin-bottom:16px">
+          从<b style="color:var(--text)">选题、剧本、分镜、AI 生成、动态制作、配音、音效到成片发布</b>全链路把控。
+          制定排期表、里程碑节点与质检标准；管理编剧、画面美术、前期 AI 资产、剪辑、配音、后期高清等协作环节，
+          建立反馈与修改机制，减少无效返工。
+        </p>
+        <div class="skill-tags">
+          <span class="tag g">摄影摄像</span>
+          <span class="tag g">平面设计</span>
+          <span class="tag g">UI 设计</span>
+          <span class="tag">0→1 团队搭建</span>
+          <span class="tag">60+ 人培养</span>
+          <span class="tag">标准化流程</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORKS ===== -->
+<section id="works">
+  <div class="wrap">
+    <div class="sec-sub">Selected Works · 短剧量产</div>
+    <h2 class="sec">四部短剧，四种题材，<span class="gold">50+ 集成片</span></h2>
+    <div class="work-grid" style="margin-top:40px">
+
+      <!-- 母亲的枷锁 · 抖音爆款 -->
+      <div class="work-card">
+        <div class="wc-cover">
+          <img src="assets/deploy_assets/mama.jpg" alt="母亲的枷锁" style="object-position:center 40%">
+          <div class="badge">抖音 · 犯罪榜 TOP4</div>
+          <div class="hit">爆款 609万+</div>
+        </div>
+        <div class="wc-body">
+          <h3>母亲的枷锁</h3>
+          <div class="wc-meta">都市犯罪 · 66 集全 · 抖音上线</div>
+          <p>现实主义犯罪题材短剧，抖音账号「若尘追小剧」上线后成为小爆款，
+          单部播放量突破 609 万，登抖音短剧犯罪榜 TOP4。
+          <b style="color:var(--accent)">成片已签约，不得外传。</b></p>
+          <div class="wc-stats">
+            <span><b>609.31万</b>播放</span>
+            <span><b>66</b>集全</span>
+            <span><b>TOP4</b>犯罪榜</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 直言系统 · 红果 -->
+      <div class="work-card">
+        <div class="wc-cover">
+          <img src="assets/deploy_assets/renwu/dushi/sufan_suit.jpg" alt="直言系统">
+          <div class="badge">红果 · 已完结 60 集</div>
+          <div class="hit">收藏 9958+</div>
+        </div>
+        <div class="wc-body">
+          <h3>直言系统，我拒绝精神内耗</h3>
+          <div class="wc-meta">都市系统流 · 爽文 · 红果短剧已上线</div>
+          <p>销售苏凡意外获得直言系统，职场反内耗题材。红果短剧已完结全 60 集，
+          首集收藏 9958、点赞 698，互动过万。</p>
+          <div class="wc-stats">
+            <span><b>60</b>集完结</span>
+            <span><b>9958</b>收藏</span>
+            <span><b>698</b>点赞</span>
+          </div>
+          <button class="eps-toggle" onclick="toggleEps('eps-dou',this)">展开可播放剧集 ▾</button>
+          <div class="eps-list" id="eps-dou"></div>
+        </div>
+      </div>
+
+      <!-- 一纸假婚（假婚之后） -->
+      <div class="work-card">
+        <div class="wc-cover">
+          <img src="assets/deploy_assets/renwu/guzhuang/shenyan.jpg" alt="一纸假婚">
+          <div class="badge">抖音 · 60 集全</div>
+        </div>
+        <div class="wc-body">
+          <h3>一纸假婚：我爹与我皆是隐藏大佬</h3>
+          <div class="wc-meta">古装 / 甜宠 / 马甲反转 · 抖音上线</div>
+          <p>古装婚恋题材长篇连载，抖音账号已上线全 60 集，首集播放 1.79 万。
+          角色造型与场景资产复用率高，量产流程稳定。</p>
+          <div class="wc-stats">
+            <span><b>60</b>集全</span>
+            <span><b>1.79万</b>首集播放</span>
+            <span><b>15</b>集成片可看</span>
+          </div>
+          <button class="eps-toggle" onclick="toggleEps('eps-guzhuang',this)">展开可播放剧集 ▾</button>
+          <div class="eps-list" id="eps-guzhuang"></div>
+        </div>
+      </div>
+
+      <!-- 重返80 -->
+      <div class="work-card">
+        <div class="wc-cover">
+          <img src="assets/deploy_assets/renwu/dushi/sufan.jpg" alt="重返80">
+          <div class="badge">年代美食 · 制作中</div>
+        </div>
+        <div class="wc-body">
+          <h3>重返80：从破产川菜馆到国宴主厨</h3>
+          <div class="wc-meta">穿越 / 美食 / 逆袭 · 7 集成片</div>
+          <p>穿越年代题材，现代男主回到 80 年代川菜馆创业，从破产到国宴主厨的逆袭线。</p>
+          <div class="wc-stats">
+            <span><b>7</b>集成片</span>
+            <span><b>年代</b>写实</span>
+          </div>
+          <button class="eps-toggle" onclick="toggleEps('eps-xiandai',this)">展开可播放剧集 ▾</button>
+          <div class="eps-list" id="eps-xiandai"></div>
+        </div>
+      </div>
+
+      <!-- 阿嬷的清北梦 · 保密 -->
+      <div class="work-card">
+        <div class="wc-cover" style="height:200px">
+          <img src="assets/deploy_assets/qingbei.jpg" alt="阿嬷的清北梦" style="object-position:center 30%">
+          <div class="badge">都市亲情 · 已签协议</div>
+          <div class="hit" style="background:linear-gradient(135deg,#555,#333)">不公开</div>
+        </div>
+        <div class="wc-body">
+          <h3>阿嬷的清北梦</h3>
+          <div class="wc-meta">都市 / 亲情 / 教育题材 · 海报已出</div>
+          <p>白发阿嬷与叛逆少女的都市夜路对手戏，霓虹灯雨反射下的代际叙事。
+          <b style="color:var(--accent)">本项目已签保密协议，成片不对外公开。</b></p>
+          <div class="wc-stats">
+            <span><b>保密</b>不公开</span>
+            <span><b>都市</b>亲情题材</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 废土 -->
+      <div class="work-card">
+        <div class="wc-cover">
+          <img src="assets/deploy_assets/renwu/feitu/peichuan.jpg" alt="废土" style="object-position:center 30%">
+          <div class="badge">废土科技 · 连载中</div>
+        </div>
+        <div class="wc-body">
+          <h3>废土科技风连载短剧</h3>
+          <div class="wc-meta">废土 / 赛博 · 8 集成片 · 含 3D Q 版与写实双版本角色</div>
+          <p>废土科技世界观，复杂动作镜头走 kling 多帧模式。林小满、裴川双主角跨集一致建模。</p>
+          <button class="eps-toggle" onclick="toggleEps('eps-feitu',this)">展开可播放剧集 ▾</button>
+          <div class="eps-list" id="eps-feitu"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ===== FEATURE PROJECTS ===== -->
+<section id="feature">
+  <div class="wrap">
+    <div class="sec-sub">Flagship Projects · 重点项目</div>
+    <h2 class="sec">从 90 秒短片到 20 集长剧</h2>
+
+    <!-- 捉妖临时工 -->
+    <div class="feat" style="margin-top:40px">
+      <div class="feat-head">
+        <div>
+          <div class="feat-tag">AI 短剧 · 批量交付</div>
+          <h3>《我，捉妖的临时工，竟是妖尊？》EP01–EP20</h3>
+        </div>
+        <div style="color:var(--dim);font-size:13px">2026 · 制作交付手册</div>
+      </div>
+      <div class="feat-grid">
+        <div class="fg"><div class="n">20</div><div class="l">集数 EP01–20</div></div>
+        <div class="fg"><div class="n">408</div><div class="l">总镜次（含 1 镜后期）</div></div>
+        <div class="fg"><div class="n">35.1<span style="font-size:14px"> 分</span></div><div class="l">总时长 · 9:16 竖屏 30fps</div></div>
+        <div class="fg"><div class="n">70.3%</div><div class="l">资产跨集复用率</div></div>
+      </div>
+      <p>由自研 <b>ai-short-drama-skill v1.1</b> 批量流水线自动编译：21 角色 / 23 场景 / 34 道具，共 78 个全局资产；
+      模型路由 seedance-2.5 占 96.6%，kling-3.0 承担复杂格斗动作。</p>
+      <ul>
+        <li><b>质量门全绿：</b>P0=0 / P1=0 / P2=0，敏感词 0，blocked 0，20/20 集 can_generate</li>
+        <li><b>渲染规格统一：</b>UE5 + Lumen + Nanite + Cine Camera 物理相机，焦段按景别路由（20/35/50/85/100mm）</li>
+        <li><b>审美锚定：</b>导演塔可夫斯基 × 摄影杜可风 × 编剧伍迪·艾伦 × 美术丹提·费瑞提，压制作味</li>
+        <li><b>人机边界：</b>只编译提示词与生成队列，不自动出片、不投流、不替人拍板</li>
+      </ul>
+    </div>
+
+    <!-- 回来吃月饼 -->
+    <div class="feat">
+      <div class="feat-head">
+        <div>
+          <div class="feat-tag">艺术短片 · 90 秒竖屏</div>
+          <h3>《回来吃月饼》分镜与提示词制作文档</h3>
+        </div>
+        <div style="color:var(--dim);font-size:13px">2026 · 拍摄执行版</div>
+      </div>
+      <div class="feat-grid">
+        <div class="fg"><div class="n">90<span style="font-size:14px"> 秒</span></div><div class="l">单时长 / 9:16 / 30fps</div></div>
+        <div class="fg"><div class="n">45</div><div class="l">镜头（生成 41 + 后期 4）</div></div>
+        <div class="fg"><div class="n">58</div><div class="l">资产参考图（角色 5/场景 3/道具 4）</div></div>
+        <div class="fg"><div class="n">13</div><div class="l">句台词（全部欲言又止）</div></div>
+      </div>
+      <p>克制型情绪短片：塔可夫斯基式长镜头让时间自行显露，戈登·威利斯式阴影尊严，
+      丹提·费瑞提式可信生活细节。冷暖光对比承载两时空——现代出租屋冷白孤独，1944 腾冲焦土昏黄温暖。</p>
+      <ul>
+        <li><b>模型分布：</b>seedance-2.0 ×31 过渡镜 / seedance-2.5 ×10 关键镜</li>
+        <li><b>渲染基底：</b>UE5 Lumen 光追 + Cine Camera 物理相机 + 八猴 PBR 材质校准</li>
+        <li><b>美学纪律：</b>全片无 BGM 只留风声与环境音；时空跳转 0 帧硬切；结尾只出四个字</li>
+      </ul>
+    </div>
+
+    <!-- ENEMY + SKILL -->
+    <div class="feat">
+      <div class="feat-head">
+        <div>
+          <div class="feat-tag">交互档案 · 工具自研</div>
+          <h3>ENEMY 分镜档案 & ai-short-drama-skill v1.1</h3>
+        </div>
+        <div style="color:var(--dim);font-size:13px">2026 · 网站 / Python 工具链</div>
+      </div>
+      <div class="feat-grid">
+        <div class="fg"><div class="n">24</div><div class="l">镜头 / 5 章节 / 60s</div></div>
+        <div class="fg"><div class="n">3</div><div class="l">子 Skill + 编排器</div></div>
+        <div class="fg"><div class="n">9</div><div class="l">套参考文档（轴线/光学/合规…）</div></div>
+        <div class="fg"><div class="n">AE</div><div class="l">Logo 动效样片</div></div>
+      </div>
+      <p><b>ENEMY 全剧本分镜分类档案：</b>现实主义电影级分镜网站，24 镜头按 EP01–EP05 章节筛选，
+      点击镜头卡查看大图、剧本内容与 AI 提示词。人物主线连续，可扩展为 AI 视频。</p>
+      <ul>
+        <li><b>自研流水线：</b>script-to-assets（剧本解析）→ assets-to-prompts（分镜/模型路由/打包）→ production-guard（合规/经济门/确认队列）</li>
+        <li><b>专业能力：</b>镜头轴线计算、焦段光学路由、AI 合规预检、ROI 成本门、审美智囊团自动成团、提案人工审批</li>
+      </ul>
+      <div style="margin-top:20px">
+        <a href="assets/enemy/enemy-system.html" target="_blank" style="display:inline-block;padding:10px 24px;background:var(--accent);color:#111;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">打开 ENEMY 分镜系统 ↗</a>
+      </div>
+      <iframe src="assets/enemy/enemy-system.html" title="ENEMY 分镜系统" sandbox="allow-scripts allow-same-origin" style="width:100%;height:600px;border:1px solid var(--line);border-radius:12px;margin-top:16px"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ASSET GALLERY ===== -->
+<section id="assets">
+  <div class="wrap">
+    <div class="sec-sub">Asset Library · 资产库</div>
+    <h2 class="sec">四大风格角色资产 · <span class="gold">可复用连续建模</span></h2>
+    <p style="color:var(--mute);max-width:720px;margin-top:8px">
+      修仙 / 古装 / 废土 / 都市 四大题材男女主全套定妆照，
+      含日常、战损、正装、居家多状态，保证跨集角色一致性。
+    </p>
+
+    <div style="margin-top:36px">
+      <div style="font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:14px">修仙玄幻 · 张不为 / 胡瑶瑶 / 苏也清（7 张）</div>
+      <div class="gal" style="grid-template-columns:repeat(4,1fr)">
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/xiuzhang/zhangbuwei.jpg" alt="张不为">
+          <div class="cap">张不为<small>CHR-001 男主</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/xiuzhang/zhangbuwei_dmg.jpg" alt="张不为战损">
+          <div class="cap">张不为 · 战损<small>状态变体</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/xiuzhang/huyaoyao.jpg" alt="胡瑶瑶">
+          <div class="cap">胡瑶瑶<small>CHR-021</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/xiuzhang/huyaoyao_orig.jpg" alt="胡瑶瑶本体">
+          <div class="cap">胡瑶瑶 · 本体<small>妖尊形态</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/xiuzhang/suyeqing.jpg" alt="苏也清日常">
+          <div class="cap">苏也清 · 日常<small>CHR-002</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/xiuzhang/suyeqing_b.jpg" alt="苏也清日常1">
+          <div class="cap">苏也清 · 造型 A<small>多角度参考</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/xiuzhang/suyeqing_c.jpg" alt="苏也清日常2">
+          <div class="cap">苏也清 · 造型 B<small>多角度参考</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div style="font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:14px">古装 · 沈延 / 苏锦宁（2 张）</div>
+      <div class="gal" style="grid-template-columns:repeat(4,1fr)">
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/guzhuang/shenyan.jpg" alt="沈延">
+          <div class="cap">沈延<small>古装男主</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/guzhuang/sujinning.jpg" alt="苏锦宁">
+          <div class="cap">苏锦宁 · 便服<small>古装女主</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div style="font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:14px">废土科技风 · 林小满 / 裴川（4 张 · 写实 + Q 版双版本）</div>
+      <div class="gal" style="grid-template-columns:repeat(4,1fr)">
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/feitu/linxiaoman.jpg" alt="林小满">
+          <div class="cap">林小满<small>写实版女主</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/feitu/peichuan.jpg" alt="裴川">
+          <div class="cap">裴川<small>写实版男主</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/feitu/linxiaoman_chibi.jpg" alt="Q版林小满">
+          <div class="cap">林小满 · Q 版<small>3D Chibi</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/feitu/peichuan_chibi.jpg" alt="Q版裴川">
+          <div class="cap">裴川 · Q 版<small>3D Chibi</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div style="font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:14px">都市风 · 苏凡 / 秦璐（8 张 · 正装 / 日常 / 居家）</div>
+      <div class="gal" style="grid-template-columns:repeat(4,1fr)">
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/sufan_suit.jpg" alt="苏凡正装">
+          <div class="cap">苏凡 · 正装<small>职场男主</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/sufan.jpg" alt="苏凡">
+          <div class="cap">苏凡 · 造型 A<small>多角度参考</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/sufan_casual.jpg" alt="苏凡日常">
+          <div class="cap">苏凡 · 日常<small>生活状态</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/sufan_pajama.jpg" alt="苏凡睡衣">
+          <div class="cap">苏凡 · 居家睡衣<small>室内状态</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/qinlu.jpg" alt="秦璐">
+          <div class="cap">秦璐<small>都市女主</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/qinlu_casual.jpg" alt="秦璐日常">
+          <div class="cap">秦璐 · 日常<small>造型 A</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/qinlu_casual2.jpg" alt="秦璐日常2">
+          <div class="cap">秦璐 · 日常<small>造型 B</small></div>
+        </div>
+        <div class="gal-item">
+          <img src="assets/deploy_assets/renwu/dushi/qinlu_home.jpg" alt="秦璐居家">
+          <div class="cap">秦璐 · 居家<small>室内状态</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCENE / EMPTY SHOTS ===== -->
+<section id="scenes">
+  <div class="wrap">
+    <div class="sec-sub">Scene Design · 场景空镜</div>
+    <h2 class="sec">沉浸式场景概念图，<span class="gold">为每个世界观搭建空间</span></h2>
+    <p style="color:var(--mute);max-width:760px;margin-top:8px">
+      从修仙宗门到废土舰队，从都市出租屋到集团办公厅，全流程场景概念设计与氛围定调。
+    </p>
+    <div class="scene-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px">
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/xiuzhen_smithy.jpg')">
+        <img src="assets/deploy_assets/scenes/xiuzhen_smithy.jpg" alt="凡俗小镇铁匠铺" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">凡俗小镇 · 铁匠铺<small style="display:block;color:var(--mute);font-size:12px">修仙 / 市井烟火</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/xiuzhen_armory.jpg')">
+        <img src="assets/deploy_assets/scenes/xiuzhen_armory.jpg" alt="秘境兵器库" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">秘境 · 地下兵器库<small style="display:block;color:var(--mute);font-size:12px">修仙 / 密室机关</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/xiuzhen_ground.jpg')">
+        <img src="assets/deploy_assets/scenes/xiuzhen_ground.jpg" alt="青云宗演武场" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">青云宗 · 演武场<small style="display:block;color:var(--mute);font-size:12px">修仙 / 宗门大场面</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/feitu_market.jpg')">
+        <img src="assets/deploy_assets/scenes/feitu_market.jpg" alt="垃圾交易点" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">废土 · 垃圾交易点<small style="display:block;color:var(--mute);font-size:12px">废土 / 黑市交易</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/feitu_hatch.jpg')">
+        <img src="assets/deploy_assets/scenes/feitu_hatch.jpg" alt="离舰舷窗" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">废土 · 离舰舷窗<small style="display:block;color:var(--mute);font-size:12px">废土 / 太空舰舱</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/feitu_comms.jpg')">
+        <img src="assets/deploy_assets/scenes/feitu_comms.jpg" alt="舰队通讯舱" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">废土 · 舰队通讯舱<small style="display:block;color:var(--mute);font-size:12px">废土 / 指挥中枢</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/dushi_street.jpg')">
+        <img src="assets/deploy_assets/scenes/dushi_street.jpg" alt="公司楼下街道" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">都市 · 公司楼下街道<small style="display:block;color:var(--mute);font-size:12px">都市 / 通勤日常</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/dushi_office.jpg')">
+        <img src="assets/deploy_assets/scenes/dushi_office.jpg" alt="华腾集团办公厅" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">都市 · 华腾集团办公厅<small style="display:block;color:var(--mute);font-size:12px">都市 / 商业权力场</small></div>
+      </div>
+      <div class="scene-item" style="cursor:pointer" onclick="openLb('assets/deploy_assets/scenes/dushi_rental.jpg')">
+        <img src="assets/deploy_assets/scenes/dushi_rental.jpg" alt="苏凡出租屋" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+        <div style="margin-top:8px;font-size:14px;color:var(--fg)">都市 · 苏凡出租屋<small style="display:block;color:var(--mute);font-size:12px">都市 / 主角私密空间</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WEDDING / PHOTOGRAPHY ===== -->
+<section id="wedding">
+  <div class="wrap">
+    <div class="sec-sub">Photography · 摄影摄像作品</div>
+    <h2 class="sec">从婚礼纪实到 AI 短剧，<span class="gold">摄影基本功贯穿始终</span></h2>
+    <p style="color:var(--mute);max-width:760px;margin-top:8px">
+      自主承接婚庆拍摄期间，独立完成跟拍、运镜、剪辑全流程。以下为婚礼纪实短片样片。
+    </p>
+    <div style="margin-top:28px;max-width:800px">
+      <div style="position:relative;border-radius:12px;overflow:hidden;cursor:pointer" onclick="openVideo('assets/deploy_assets/wedding.mp4')">
+        <img src="assets/deploy_assets/wedding_cover.jpg" alt="婚礼纪实" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3)">
+          <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:15px;color:var(--fg)">婚礼纪实短片<small style="display:block;color:var(--mute);font-size:13px;margin-top:4px">独立跟拍 · 现场运镜 · 后期剪辑</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STYLE MATRIX ===== -->
+<section id="styles">
+  <div class="wrap">
+    <div class="sec-sub">Style Matrix · 视觉风格掌控</div>
+    <h2 class="sec">三种画风无缝切换，<span class="gold">3D 漫为核心竞争力</span></h2>
+    <p style="color:var(--mute);max-width:760px;margin-top:8px">
+      具备 0→1 搭建成熟制作团队的经验，可快速组建并培养生图、分镜、美术、后期剪辑等核心岗位。
+      在角色建模、光影渲染、镜头语言及战斗场面制作上具一流水准。
+    </p>
+    <div class="style-grid">
+      <div class="style-card">
+        <span class="sc-tag real">核心 · CORE</span>
+        <h4>3D 漫</h4>
+        <ul>
+          <li>人物三视图 / 场景四视图标准化产出</li>
+          <li>日常化剧本 → A 风格细腻表情</li>
+          <li>架空玄幻剧本 → B 风格电影质感</li>
+          <li>角色建模、光影渲染、战斗场面一流</li>
+        </ul>
+        <div class="core">★ 主力画风 · 以此承接绝大多数项目</div>
+      </div>
+      <div class="style-card">
+        <span class="sc-tag real">写实 · REAL</span>
+        <h4>伪真人</h4>
+        <ul>
+          <li>皮肤肌理把控，解决 AI "油脸"问题</li>
+          <li>自主改前置 + 全局组提示词</li>
+          <li>人物与场景建立真实光追关系</li>
+          <li>从源头保证不假、不油、整体质感</li>
+        </ul>
+        <div class="core">适合：都市 / 现实主义 / 犯罪题材</div>
+      </div>
+      <div class="style-card">
+        <span class="sc-tag anime">二次元 · 2D</span>
+        <h4>二维漫</h4>
+        <ul>
+          <li>玄幻 / 日漫 / 赛博题材风格化产出</li>
+          <li>《神仙饭店》《富家少爷重生败家系统》</li>
+          <li>人物设定 + 场景概念图全套</li>
+        </ul>
+        <div class="core">适合：二次元玄幻 / 游戏改编</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REEL / SAMPLE VIDEOS ===== -->
+<section id="reel">
+  <div class="wrap">
+    <div class="sec-sub">Showreel · 视频样片</div>
+    <h2 class="sec">三种画风样片，<span class="gold">点击即播</span></h2>
+    <p style="color:var(--mute);max-width:760px;margin-top:8px">
+      按画风分组的代表作片段，涵盖玄幻/恐怖/追逐/打斗/系统/温情/悬疑/海外言情等题材。
+    </p>
+    <div class="reel-tabs">
+      <div class="reel-tab on" data-t="r-3d">3D 漫（13）</div>
+      <div class="reel-tab" data-t="r-real">伪真人（10）</div>
+      <div class="reel-tab" data-t="r-2d">二维漫（3）</div>
+    </div>
+    <div class="reel-grid on" id="r-3d"></div>
+    <div class="reel-grid" id="r-real"></div>
+    <div class="reel-grid" id="r-2d"></div>
+  </div>
+</section>
+
+<!-- ===== AUDIO ===== -->
+<section id="audio">
+  <div class="wrap">
+    <div class="sec-sub">Voice Library · 配音资产</div>
+    <h2 class="sec">80+ 音色样本库，<span class="gold">角色声音即刻匹配</span></h2>
+    <p style="color:var(--mute);max-width:720px;margin-top:8px">
+      覆盖男女主、反派、长辈、儿童、旁白、方言（东北/台湾）等全类型音色，
+      含情绪变体（温柔 / 冷酷 / 坚毅 / 活泼 / 哭腔 / 怒吼）。试听：
+    </p>
+    <div class="aud-grid" style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>东北话</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/东北话.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>中年男人（急切）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/中年男人（急切）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>中年老师（男）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/中年老师（男）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>云霆</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/云霆.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>人参小男孩</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/人参小男孩.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>儿童声音</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/儿童声音.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>刀哥（哭腔）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/刀哥（哭腔）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>利落干净配音</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/利落干净配音.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>台湾腔（女性）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/台湾腔（女性）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>吴起落</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/吴起落.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-关心</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-关心.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-冷酷</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-冷酷.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-冷静</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-冷静.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-坚毅月如</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-坚毅月如.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-学姐</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-学姐.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-家主</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-家主.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-有魄力</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-有魄力.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-活泼</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-活泼.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-温婉医生</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-温婉医生.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-温柔细腻</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-温柔细腻.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-睿智女主</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-睿智女主.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-老太声音</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-老太声音.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-茶茶</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-茶茶.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-贵妇配音</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-贵妇配音.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女-鬼灵精怪</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女-鬼灵精怪.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女性母亲</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女性母亲.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女性（关切）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女性（关切）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>女生（护士）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/女生（护士）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>宁墨声色</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/宁墨声色.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>小孩子（男孩）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/小孩子（男孩）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>年轻疑问（男）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/年轻疑问（男）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>怒吼（男）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/怒吼（男）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>普洱音色淡淡</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/普洱音色淡淡.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>朗生</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/朗生.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-中年人正派</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-中年人正派.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-中年男父</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-中年男父.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-博士短</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-博士短.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-商人</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-商人.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-壮汉</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-壮汉.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-大哥</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-大哥.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-粗犷中年人</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-粗犷中年人.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-老板小人</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-老板小人.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-老顽童</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-老顽童.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-迂腐书生气</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-迂腐书生气.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-阴湿音</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-阴湿音.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-霸气</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-霸气.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-青年</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-青年.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男-高深莫测</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男-高深莫测.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男主-清脆</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男主-清脆.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男主</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男主.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男主（指挥）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男主（指挥）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男二-正气</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男二-正气.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>男医生（正义）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/男医生（正义）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>登记员</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/登记员.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>神秘中年男人</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/神秘中年男人.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>空旷（上帝音）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/空旷（上帝音）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>老头</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/老头.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>胡瑶瑶</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/胡瑶瑶.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>苏也青</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/苏也青.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>苏母</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/苏母.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>苏父</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/苏父.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>萧月配音</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/萧月配音.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>警察（男）</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/警察（男）.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>豹子妖吵架男</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/豹子妖吵架男.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>野猪妖女白领</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/野猪妖女白领.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>阴强</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/阴强.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>院长妈妈</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/院长妈妈.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>马刚</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/马刚.mp3"></audio>
+      </div>
+      <div class="aud">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <div class="info"><b>骆局长</b></div>
+        <audio controls preload="none" src="assets/deploy_assets/audio/骆局长.mp3"></audio>
+      </div>
+    </div>
+  </section>
+
+<!-- ===== EDU ===== -->
+<section id="edu">
+  <div class="wrap">
+    <div class="sec-sub">Education · 教育与荣誉</div>
+    <h2 class="sec">科班出身，长期在校评优</h2>
+    <div class="edu-grid" style="margin-top:36px">
+      <div class="edu-card">
+        <h4>湖南工艺美术职业大学 · 大专</h4>
+        <div class="sub">视觉传播设计学院 · 广告艺术设计（新媒体传播与策划方向）</div>
+        <p style="color:var(--mute);font-size:13.5px">
+          从中专一路读到大专，系统训练平面设计、摄影摄像与 UI 设计基本功；
+          毕业设计聚焦现实主义电影级分镜，具备从创意到成片的完整训练。
+        </p>
+      </div>
+      <div class="edu-card">
+        <h4>荣誉奖项</h4>
+        <div class="sub">在校期间综合表现</div>
+        <div class="honor">
+          <span>国家励志奖学金 ×1</span>
+          <span>二等综合奖学金 ×2</span>
+          <span>校级三好学生 ×2</span>
+          <span>校级优秀学生干部 ×3</span>
+        </div>
+        <p style="color:var(--mute);font-size:13.5px;margin-top:16px">
+          长期担任学生干部，具备稳定的执行力、沟通协调能力与项目推进意识。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT / FOOTER ===== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="big serif">让我们<span class="gold">一起拍片</span></div>
+    <p>摄影师 / 剪辑后期 / 新媒体运营 · AI 短剧制作</p>
+    <div class="links">
+      <a href="tel:18273496710">电话 · 18273496710</a>
+      <a href="mailto:18273496710@163.com">邮件 · 18273496710@163.com</a>
+      <a href="https://github.com/zhaic001" target="_blank" rel="noopener">GitHub · zhaic001</a>
+      <a href="assets/resume.pdf" download="zihai-chun-resume.pdf">下载 PDF 简历</a>
+    </div>
+    '<div style="margin:16px 0">
+    <img src="assets/qrcode.png" alt="扫码查看资海春个人简历" style="width:140px;height:140px;border-radius:8px">
+    <div style="font-size:11px;color:var(--mute);margin-top:6px">扫码查看完整作品集</div>
+  </div>
+  <div class="copy">© 2026 资海春 · Portfolio · 广州 海珠区</div>'
+  </div>
+</footer>
+
+<!-- ===== VIDEO MODAL ===== -->
+<div class="modal" id="vmodal">
+  <button class="close" onclick="closeModal()">&times;</button>
+  <video controls></video>
+</div>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="modal" id="lmodal" onclick="closeLb()">
+  <button class="close">&times;</button>
+  <img style="max-width:90vw;max-height:88vh;border-radius:8px" src="">
+</div>
+
+<script>
+/* ===== 剧集数据（本地成片） ===== */
+const DRAMAS = {
+  'eps-guzhuang': {
+    dir: 'assets/deploy_assets/reels/',
+    eps: [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55].map(n => ({
+      file: `ep_guzhuang_${n}.mp4`, label: `EP${n}`
+    }))
+  },
+  'eps-xiandai': {
+    dir: 'assets/deploy_assets/reels/',
+    eps: [
+      ['ep_xiandai_35.mp4','EP35'],['ep_xiandai_36.mp4','EP36'],['ep_xiandai_37.mp4','EP37'],
+      ['ep_xiandai_38.mp4','EP38'],['ep_xiandai_39.mp4','EP39'],['ep_xiandai_40.mp4','EP40'],
+      ['ep_xiandai_41.mp4','EP41']
+    ].map(([f,l]) => ({file:f, label:l}))
+  },
+  'eps-dou': {
+    dir: 'assets/deploy_assets/reels/',
+    eps: [
+      ['ep_dou_15.mp4','EP15'],['ep_dou_16.mp4','EP16'],['ep_dou_17.mp4','EP17'],
+      ['ep_dou_18.mp4','EP18'],['ep_dou_19.mp4','EP19'],['ep_dou_20.mp4','EP20'],
+      ['ep_dou_21.mp4','EP21'],['ep_dou_32.mp4','EP32'],['ep_dou_33.mp4','EP33'],
+      ['ep_dou_34.mp4','EP34']
+    ].map(([f,l]) => ({file:f, label:l}))
+  },
+  'eps-feitu': {
+    dir: 'assets/deploy_assets/reels/',
+    eps: [
+      ['ep_feitu_08.mp4','EP8'],['ep_feitu_09.mp4','EP9'],['ep_feitu_10.mp4','EP10'],
+      ['ep_feitu_14.mp4','EP14'],['ep_feitu_15.mp4','EP15'],['ep_feitu_23.mp4','EP23'],
+      ['ep_feitu_24.mp4','EP24']
+    ].map(([f,l]) => ({file:f, label:l}))
+  }
+};
+
+// 渲染剧集按钮
+Object.keys(DRAMAS).forEach(id => {
+  const box = document.getElementById(id);
+  if(!box) return;
+  DRAMAS[id].eps.forEach(ep => {
+    const b = document.createElement('div');
+    b.className = 'ep';
+    b.textContent = '▶ ' + ep.label;
+    b.onclick = () => openVideo(DRAMAS[id].dir + ep.file);
+    box.appendChild(b);
+  });
+});
+
+function toggleEps(id, btn){
+  const box = document.getElementById(id);
+  box.classList.toggle('on');
+  btn.textContent = box.classList.contains('on') ? '收起剧集列表 ▴' : '展开可播放剧集 ▾';
+}
+
+function openVideo(src){
+  const m = document.getElementById('vmodal');
+  const v = m.querySelector('video');
+  v.src = src; m.classList.add('on'); v.play();
+}
+function closeModal(){
+  const m = document.getElementById('vmodal');
+  const v = m.querySelector('video'); v.pause(); v.src='';
+  m.classList.remove('on');
+}
+document.getElementById('vmodal').addEventListener('click', function(e){
+  if(e.target === this) closeModal();
+});
+
+/* ===== 图片灯箱 ===== */
+function openLb(src){
+  const m = document.getElementById('lmodal');
+  m.querySelector('img').src = src;
+  m.classList.add('on');
+}
+function closeLb(){
+  document.getElementById('lmodal').classList.remove('on');
+}
+document.querySelectorAll('.gal-item img, .wc-cover img').forEach(img => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => openLb(img.src));
+});
+
+/* ===== 样片视频数据 ===== */
+const REELS = {
+  'r-3d': {
+    dir: '',
+    items: [
+      ['assets/deploy_assets/reels/3d_01.mp4','玄幻开场 · 01','assets/reel-covers/3d_01.jpg'],
+      ['assets/deploy_assets/reels/3d_02.mp4','玄幻开场 · 02','assets/reel-covers/3d_02.jpg'],
+      ['assets/deploy_assets/reels/3d_03.mp4','科幻修仙','assets/reel-covers/3d_03.jpg'],
+      ['assets/deploy_assets/reels/3d_04.mp4','科幻废土','assets/reel-covers/3d_04.jpg'],
+      ['assets/deploy_assets/reels/3d_05.mp4','系统穿越','assets/reel-covers/3d_05.jpg'],
+      ['assets/deploy_assets/reels/3d_06.mp4','叙事感镜','assets/reel-covers/3d_06.jpg'],
+      ['assets/deploy_assets/reels/3d_07.mp4','打斗 · 01','assets/reel-covers/3d_07.jpg'],
+      ['assets/deploy_assets/reels/3d_08.mp4','打斗 · 02','assets/reel-covers/3d_08.jpg'],
+      ['assets/deploy_assets/reels/3d_09.mp4','追逐 · 01','assets/reel-covers/3d_09.jpg'],
+      ['assets/deploy_assets/reels/3d_10.mp4','追逐 · 02','assets/reel-covers/3d_10.jpg'],
+      ['assets/deploy_assets/reels/3d_11.mp4','追逐 · 03','assets/reel-covers/3d_11.jpg'],
+      ['assets/deploy_assets/reels/3d_12.mp4','恐怖氛围','assets/reel-covers/3d_12.jpg'],
+      ['assets/deploy_assets/reels/3d_13.mp4','海外女频','assets/reel-covers/3d_13.jpg']
+    ]
+  },
+  'r-real': {
+    dir: '',
+    items: [
+      ['assets/deploy_assets/reels/real_01.mp4','阿嬷的清北梦 · EP20','assets/reel-covers/real_01.jpg'],
+      ['assets/deploy_assets/reels/real_02.mp4','古装搞笑女','assets/reel-covers/real_07.jpg'],
+      ['assets/deploy_assets/reels/real_03.mp4','现代温情','assets/reel-covers/real_05.jpg'],
+      ['assets/deploy_assets/reels/real_04.mp4','现代系统','assets/reel-covers/real_04.jpg'],
+      ['assets/deploy_assets/reels/real_05.mp4','古装玄幻','assets/reel-covers/real_03.jpg'],
+      ['assets/deploy_assets/reels/real_06.mp4','古装搞笑','assets/reel-covers/real_06.jpg'],
+      ['assets/deploy_assets/reels/real_07.mp4','海外 · 现代言情','assets/reel-covers/real_10.jpg'],
+      ['assets/deploy_assets/reels/real_08.mp4','海外 · 现代玄幻言情','assets/reel-covers/real_09.jpg'],
+      ['assets/deploy_assets/reels/real_09.mp4','海外 · 古西欧言情','assets/reel-covers/real_08.jpg'],
+      ['assets/deploy_assets/reels/real_10.mp4','海外 · 古欧玄幻言情','assets/reel-covers/real_07.jpg']
+    ]
+  },
+  'r-2d': {
+    dir: '',
+    items: [
+      ['assets/deploy_assets/reels/2d_01.mp4','玄幻打斗','assets/reel-covers/2d_01.jpg'],
+      ['assets/deploy_assets/reels/2d_02.mp4','现代悬疑','assets/reel-covers/2d_02.jpg'],
+      ['assets/deploy_assets/reels/2d_03.mp4','现代打斗','assets/reel-covers/2d_03.jpg']
+    ]
+  }
+};
+Object.keys(REELS).forEach(id => {
+  const box = document.getElementById(id);
+  REELS[id].items.forEach(([f,label,cover]) => {
+    const d = document.createElement('div');
+    d.className = 'reel';
+    d.innerHTML = '<div class="thumb"><img src="'+cover+'" loading="lazy" alt="'+label+'"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="meta"><b>'+label+'</b><small>点击播放</small></div>';
+    d.onclick = () => openVideo(REELS[id].dir + f);
+    box.appendChild(d);
+  });
+});
+document.querySelectorAll('.reel-tab').forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll('.reel-tab').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('.reel-grid').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+    document.getElementById(t.dataset.t).classList.add('on');
+  };
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){ closeModal(); closeLb(); }
+});
+</script>
+
+<script>document.addEventListener("contextmenu",function(e){if(!e.target.closest('a[href$=".pdf"],button,input'))e.preventDefault()});document.addEventListener("dragstart",function(e){if(e.target.tagName==="IMG"||e.target.tagName==="VIDEO")e.preventDefault()});document.addEventListener("touchstart",function(e){if(e.target.tagName==="IMG"||e.target.tagName==="VIDEO")e.preventDefault()},{passive:false});</script>
+</body>
+</html>
