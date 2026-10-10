@@ -356,6 +356,10 @@ footer .links a:hover{border-color:var(--accent); color:var(--accent)}
 
 /* Anti-download */
 img,video{-webkit-user-drag:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+
+video::-internal-media-controls-download-button { display:none !important; }
+video::-webkit-media-controls-enclosure { overflow:hidden !important; }
+video::-webkit-media-controls-panel { width: calc(100% + 32px) !important; }
 </style>
 </head>
 <body>
@@ -1448,7 +1452,7 @@ img,video{-webkit-user-drag:none!important;user-select:none!important;-webkit-to
 <!-- ===== VIDEO MODAL ===== -->
 <div class="modal" id="vmodal">
   <button class="close" onclick="closeModal()">&times;</button>
-  <video controls></video>
+  <video controlsList="nodownload" controls></video>
 </div>
 
 <!-- ===== LIGHTBOX ===== -->
