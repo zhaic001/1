@@ -360,6 +360,16 @@ img,video{-webkit-user-drag:none!important;user-select:none!important;-webkit-to
 video::-internal-media-controls-download-button { display:none !important; }
 video::-webkit-media-controls-enclosure { overflow:hidden !important; }
 video::-webkit-media-controls-panel { width: calc(100% + 32px) !important; }
+
+.video-wrap { position: relative; display: block; }
+.video-wrap video { width: 100%; display: block; }
+.video-protect {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2; cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; user-select: none;
+}
+.video-wrap.playing .video-protect { display: none; }
 </style>
 </head>
 <body>
@@ -1452,7 +1462,10 @@ video::-webkit-media-controls-panel { width: calc(100% + 32px) !important; }
 <!-- ===== VIDEO MODAL ===== -->
 <div class="modal" id="vmodal">
   <button class="close" onclick="closeModal()">&times;</button>
-  <video controlsList="nodownload noremoteplayback" disablePictureInPicture controls></video>
+  <video id="vplayer" playsinline webkit-playsinline controlsList="nodownload noremoteplayback" disablePictureInPicture style="max-width:92vw;max-height:85vh;border-radius:8px"></video>
+  <div id="vplaybtn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;border-radius:50%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5">
+    <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  </div>
 </div>
 
 <!-- ===== LIGHTBOX ===== -->
@@ -1516,14 +1529,20 @@ function toggleEps(id, btn){
   btn.textContent = box.classList.contains('on') ? '收起剧集列表 ▴' : '展开可播放剧集 ▾';
 }
 
+var vp = document.getElementById('vplayer');
+var vpb = document.getElementById('vplaybtn');
+vpb.addEventListener('click', function(){ vp.play(); });
+vp.addEventListener('click', function(){ if(vp.paused){vp.play();vpb.style.display='none';} else {vp.pause();vpb.style.display='flex';} });
+vp.addEventListener('play', function(){ vpb.style.display='none'; });
+vp.addEventListener('pause', function(){ vpb.style.display='flex'; });
+vp.addEventListener('ended', function(){ vpb.style.display='flex'; });
 function openVideo(src){
   const m = document.getElementById('vmodal');
-  const v = m.querySelector('video');
-  v.src = src; m.classList.add('on'); v.play();
+  vp.src = src; m.classList.add('on'); vp.play();
 }
 function closeModal(){
   const m = document.getElementById('vmodal');
-  const v = m.querySelector('video'); v.pause(); v.src='';
+  vp.pause(); vp.src=''; vpb.style.display='flex';
   m.classList.remove('on');
 }
 document.getElementById('vmodal').addEventListener('click', function(e){
@@ -1629,6 +1648,23 @@ document.addEventListener('loadedmetadata', function(e) {
 document.addEventListener('keydown', function(e) {
   if((e.ctrlKey && ['s','p','u'].includes(e.key.toLowerCase())) || e.key === 'F12') e.preventDefault();
 });
+</script>
+<script>
+document.addEventListener('click', function(e) {
+  var p = e.target.closest('.video-protect');
+  if(p) {
+    var v = p.parentElement.querySelector('video');
+    if(v) { v.play(); p.parentElement.classList.add('playing'); }
+  }
+  // Click outside to pause and show overlay again
+});
+document.addEventListener('visibilitychange', function(){});
+// When video ends, show overlay again
+document.addEventListener('ended', function(e) {
+  if(e.target.tagName === 'VIDEO') {
+    e.target.parentElement.classList.remove('playing');
+  }
+}, true);
 </script>
 </body>
 </html>
